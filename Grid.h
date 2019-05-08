@@ -10,8 +10,9 @@ public:
     std::vector<std::vector<Rect *>> gridData;
     Grid();
     void Print();
-    void draw(); 
+    void draw();
     std::vector<int> ContainsFullRows();
+    Rect *getAt(int x, int y);
     ~Grid();
 };
 

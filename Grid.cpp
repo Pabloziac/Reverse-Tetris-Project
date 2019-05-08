@@ -1,4 +1,5 @@
 #include "Grid.h"
+#include "Rect.h"
 Grid::Grid()
 {
     int yElements = 20;
@@ -58,6 +59,10 @@ void Grid::draw()
             curr->draw();
         }
     }
+}
+Rect *Grid::getAt(int x, int y)
+{
+    return gridData.at(x).at(y);
 }
 
 Grid::~Grid()
