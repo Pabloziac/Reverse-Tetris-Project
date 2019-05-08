@@ -1,7 +1,7 @@
 #include "Grid.h"
 Grid::Grid()
 {
-    int yElements = 13;
+    int yElements = 20;
     int xElements = 13;
     float width = 0.14;
     float height = 0.14;
@@ -13,10 +13,8 @@ Grid::Grid()
         {
             float x;
             float y;
-
-            x = -1.5 + width * i + 0.007 * i;
-            y = 1.0 - width * j - 0.007 * j;
-
+            x = -1.5 + width * j + 0.007 * j;
+            y = 1.0 - height * i - 0.007 * i;
             aRow.push_back(new Rect(x, y, width, height, 0.4, 0.9, 0.4));
         }
         matrix.push_back(aRow);
@@ -31,7 +29,6 @@ void Grid::Print()
     {
         for (int j = 0; j < gridData.at(i).size(); j++)
         {
-
             std::cout << gridData.at(i).at(j)
                       << " ";
         }
