@@ -3,12 +3,14 @@
 
 #include <vector>
 #include <iostream>
+#include "Rect.h"
 class Grid
 {
 public:
-    std::vector<std::vector<int>> gridData;
+    std::vector<std::vector<Rect *>> gridData;
     Grid();
     void Print();
+    void draw(); 
     std::vector<int> ContainsFullRows();
     ~Grid();
 };

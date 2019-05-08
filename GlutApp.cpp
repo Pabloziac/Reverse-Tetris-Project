@@ -13,7 +13,6 @@ GlutApp::GlutApp(int argc, char** argv, int width, int height, const char* title
     this->height = height;
     this->title = title;
     
-    
     // Initialize GLUT
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);

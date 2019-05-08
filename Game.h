@@ -4,11 +4,12 @@
 #include "AppComponent.h"
 #include "AnimatedRect.h"
 #include "Timer.h"
+#include "Grid.h"
 
 class Game: public AppComponent, private Timer{
     TexRect* mushroom;
     Rect* projectile;
-    
+    Grid* grid;
     bool projectileVisible;
     bool mushroomVisible;
     bool up;

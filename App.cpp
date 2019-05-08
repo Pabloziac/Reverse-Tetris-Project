@@ -7,9 +7,6 @@ App::App(int argc, char** argv, int width, int height, const char* title): GlutA
     addComponent(new Game());
     addComponent(new Ad("See the best Android phones. Press 1.", "http://apple.com"));
     
-    Grid *grid = new Grid();
-    grid->Print(); 
-    
     fullscreen = false;
 }
 
