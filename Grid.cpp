@@ -18,12 +18,23 @@ Grid::Grid()
 
 void Grid::Print()
 {
-    std::cout << "Cash Money \n";
+    std::cout << "Grid \n";
+    for (int i = 0; i < gridData.size(); i++)
+    {
+        for (int j = 0; j < gridData.at(i).size(); j++)
+        {
+
+            std::cout << gridData.at(i).at(j)
+                      << " ";
+        }
+        std::cout << std::endl;
+    }
 }
+
 std::vector<int> Grid::ContainsFullRows()
 {
     // TODO: check each row if they are complete
-    std::vector<int> nums; 
+    std::vector<int> nums;
     for (int i = 0; i < gridData.size(); i++)
     {
         for (int j = 0; j < gridData.at(i).size(); j++)
@@ -32,6 +43,7 @@ std::vector<int> Grid::ContainsFullRows()
         }
     }
 }
+
 Grid::~Grid()
 {
 }
