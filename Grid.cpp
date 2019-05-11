@@ -1,11 +1,20 @@
 #include "Grid.h"
 #include "Rect.h"
+
 Grid::Grid()
 {
-    int yElements = 20;
-    int xElements = 13;
+    // Grid states
+    currentState = chillin;
+
+    // deleting behavior
+    deletingState = notDeleting;
+    deletingRow = 0;
+
+    yElements = 20;
+    xElements = 13;
     float width = 0.14;
     float height = 0.14;
+
     std::vector<std::vector<Rect *>> matrix;
     for (int i = 0; i < yElements; i++)
     {
@@ -48,21 +57,56 @@ std::vector<int> Grid::ContainsFullRows()
             gridData.at(i).at(j);
         }
     }
+    return nums;
 }
+
 void Grid::draw()
 {
     for (int i = 0; i < gridData.size(); i++)
     {
         for (int j = 0; j < gridData.at(i).size(); j++)
         {
-            Rect *curr = gridData.at(i).at(j);
-            curr->draw();
+            if (!(currentState == deletingARow && deletingRow == i))
+            {
+                Rect *curr = gridData.at(i).at(j);
+                curr->draw();
+            }
         }
     }
 }
 Rect *Grid::getAt(int x, int y)
 {
     return gridData.at(x).at(y);
+}
+
+// deleting behavior
+void Grid::deleteRow(int i)
+{
+    std::cout << "set to delete row: " << i << std::endl;
+    currentState = deletingARow;
+    deletingState = movingRects;
+    deletingRow = i;
+}
+
+void Grid::continueMovingRects()
+{
+    // ggridData
+
+    if (currentState == deletingARow && deletingState == movingRects)
+    {
+        // go through all elements in row
+        for (int i = 0; gridData.at(deletingRow + 1).size(); i++)
+        {
+            gridData.at(deletingRow + 1).at(i)->setB(0.5);
+        }
+        for (int i = 0; gridData.at(deletingRow + 1).size(); i++)
+        {
+            float yPos = gridData.at(deletingARow + 1).at(i)->getY();
+            yPos += 0.005;
+            gridData.at(deletingARow + 1).at(i)->setY(yPos);
+        }
+        glutPostRedisplay();
+    }
 }
 
 Grid::~Grid()

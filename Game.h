@@ -6,10 +6,11 @@
 #include "Timer.h"
 #include "Grid.h"
 
-class Game: public AppComponent, private Timer{
-    TexRect* mushroom;
-    Rect* projectile;
-    Grid* grid;
+class Game : public AppComponent, private Timer
+{
+    TexRect *mushroom;
+    Rect *projectile;
+    Grid *grid;
     bool projectileVisible;
     bool mushroomVisible;
     bool up;
@@ -17,17 +18,16 @@ class Game: public AppComponent, private Timer{
     bool hit;
     float theta;
     float deg;
+
 public:
-    AnimatedRect* explosion;
+    AnimatedRect *explosion;
     Game();
-    
-    void draw() const ;
+
+    void draw() const;
     void handleKeyDown(unsigned char, float, float);
-    
+    void continueMovingRects();
     void action();
-
     ~Game();
-
 };
 
-#endif 
+#endif
