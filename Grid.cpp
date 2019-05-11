@@ -8,14 +8,19 @@ Grid::Grid()
 
     // deleting behavior
     deletingState = notDeleting;
-    deletingRow = 0;
+    deletingRowIndex = 0;
 
-    yElements = 20;
+    yElements = 13;
     xElements = 13;
-    float width = 0.14;
-    float height = 0.14;
-
+    rectWidth = 0.14;
+    rectHeight = 0.14;
     std::vector<std::vector<Rect *>> matrix;
+    gridData = matrix;
+    resetGrid();
+}
+
+void Grid::resetGrid()
+{
     for (int i = 0; i < yElements; i++)
     {
         std::vector<Rect *> aRow;
@@ -23,13 +28,12 @@ Grid::Grid()
         {
             float x;
             float y;
-            x = -1.5 + width * j + 0.007 * j;
-            y = 1.0 - height * i - 0.007 * i;
-            aRow.push_back(new Rect(x, y, width, height, 0.4, 0.9, 0.4));
+            x = -1.5 + rectWidth * j + 0.007 * j;
+            y = 1.0 - rectHeight * i - 0.007 * i;
+            aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
         }
-        matrix.push_back(aRow);
+        gridData.push_back(aRow);
     }
-    gridData = matrix;
 }
 
 void Grid::Print()
@@ -62,11 +66,13 @@ std::vector<int> Grid::ContainsFullRows()
 
 void Grid::draw()
 {
+    // rows
     for (int i = 0; i < gridData.size(); i++)
     {
-        for (int j = 0; j < gridData.at(i).size(); j++)
+        // rect
+        if (!(currentState == deletingARow && deletingRowIndex == i))
         {
-            if (!(currentState == deletingARow && deletingRow == i))
+            for (int j = 0; j < gridData.at(i).size(); j++)
             {
                 Rect *curr = gridData.at(i).at(j);
                 curr->draw();
@@ -82,28 +88,46 @@ Rect *Grid::getAt(int x, int y)
 // deleting behavior
 void Grid::deleteRow(int i)
 {
+    deletingRowIndex = i;
     std::cout << "set to delete row: " << i << std::endl;
     currentState = deletingARow;
     deletingState = movingRects;
-    deletingRow = i;
 }
 
 void Grid::continueMovingRects()
 {
-    // ggridData
-
     if (currentState == deletingARow && deletingState == movingRects)
     {
+        bool willStop = false;
         // go through all elements in row
-        for (int i = 0; gridData.at(deletingRow + 1).size(); i++)
+        for (int movingRowsIndex = deletingRowIndex + 1; movingRowsIndex < gridData.size(); movingRowsIndex++)
         {
-            gridData.at(deletingRow + 1).at(i)->setB(0.5);
+            for (int i = 0; i < gridData.at(movingRowsIndex).size(); i++)
+            {
+                float yPos = gridData.at(movingRowsIndex).at(i)->getY();
+                yPos += 0.00035;
+                gridData.at(movingRowsIndex).at(i)->setY(yPos);
+                if (deletingRowIndex + 1 == movingRowsIndex)
+                {
+                    int borderIndexRow = deletingRowIndex - 1;
+                    // dev tests
+                    gridData.at(borderIndexRow).at(i)->setG(0);
+                    gridData.at(borderIndexRow).at(i)->setB(0);
+
+                    if (gridData.at(borderIndexRow).at(i)->touchesBottomEdge(gridData.at(movingRowsIndex).at(i)))
+                    {
+                        willStop = true;
+                    }
+                }
+            }
         }
-        for (int i = 0; gridData.at(deletingRow + 1).size(); i++)
+        if (willStop)
         {
-            float yPos = gridData.at(deletingARow + 1).at(i)->getY();
-            yPos += 0.005;
-            gridData.at(deletingARow + 1).at(i)->setY(yPos);
+            std::vector<std::vector<Rect *>>::iterator nth = gridData.begin() + deletingRowIndex;
+            gridData.erase(nth);
+            deletingRowIndex = 0;
+            currentState = chillin;
+            deletingState = notDeleting;
         }
         glutPostRedisplay();
     }
