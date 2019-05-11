@@ -7,7 +7,7 @@
 #include <iostream>
 #include "Rect.h"
 #include "Pairs.h"
-enum tMoShape{tShape , sShape, lShape, zShape, mlShape, sqShape};
+enum tMoShape{tShape , lShape, mlShape, sShape, zShape, sqShape};
 enum Color{red, green, yellow};
 enum tMoVersion{v1, v2, v3, v4};
 

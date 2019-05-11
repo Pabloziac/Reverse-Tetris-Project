@@ -14,8 +14,8 @@ Tetromino::Tetromino()
     int xElements = 4;
     float width = 0.14;
     float height = 0.14;
-    shape = tShape;
-    version = v3;
+    shape = lShape;
+    version = v1;
     
     // shape
     vector<vector<Rect *>> tMo;
@@ -34,7 +34,7 @@ Tetromino::Tetromino()
 //    vector of pairs  = models.at(shape).at(version)
     
     vector<vector<Pairs *>> tShapeList;
-    // tShape v1
+    // tShape shape =0
     vector<Pairs *> tShapeV1;
     vector<Pairs *> tShapeV2;
     vector<Pairs *> tShapeV3;
@@ -86,122 +86,68 @@ Tetromino::Tetromino()
     tShapeList.push_back(tShapeV4);
     
     modelsVector.push_back(tShapeList);
-    cout << "here" << endl;
+    
+    
+    vector<vector<Pairs *>> lShapeList;
+    // lShape shape=1
+    vector<Pairs *> lShapeV1;
+    vector<Pairs *> lShapeV2;
+    vector<Pairs *> lShapeV3;
+    vector<Pairs *> lShapeV4;
+    
+    Pairs* lShapeV1pair1 = new Pairs(0, 2);
+    Pairs* lShapeV1pair2 = new Pairs(1, 0);
+    Pairs* lShapeV1pair3 = new Pairs(1, 1);
+    Pairs* lShapeV1pair4 = new Pairs(1, 2);
+    
+    Pairs* lShapeV2pair1 = new Pairs(0, 1);
+    Pairs* lShapeV2pair2 = new Pairs(1, 1);
+    Pairs* lShapeV2pair3 = new Pairs(2, 1);
+    Pairs* lShapeV2pair4 = new Pairs(2, 2);
+
+    Pairs* lShapeV3pair1 = new Pairs(1, 0);
+    Pairs* lShapeV3pair2 = new Pairs(1, 1);
+    Pairs* lShapeV3pair3 = new Pairs(2, 0);
+    Pairs* lShapeV3pair4 = new Pairs(1, 2);
+
+    Pairs* lShapeV4pair1 = new Pairs(0, 0);
+    Pairs* lShapeV4pair2 = new Pairs(1, 1);
+    Pairs* lShapeV4pair3 = new Pairs(0, 1);
+    Pairs* lShapeV4pair4 = new Pairs(2, 1);
+    
+    lShapeV1.push_back(lShapeV1pair1);
+    lShapeV1.push_back(lShapeV1pair2);
+    lShapeV1.push_back(lShapeV1pair3);
+    lShapeV1.push_back(lShapeV1pair4);
+
+    lShapeV2.push_back(lShapeV2pair1);
+    lShapeV2.push_back(lShapeV2pair2);
+    lShapeV2.push_back(lShapeV2pair3);
+    lShapeV2.push_back(lShapeV2pair4);
+
+    lShapeV3.push_back(lShapeV3pair1);
+    lShapeV3.push_back(lShapeV3pair2);
+    lShapeV3.push_back(lShapeV3pair3);
+    lShapeV3.push_back(lShapeV3pair4);
+
+    lShapeV4.push_back(lShapeV4pair1);
+    lShapeV4.push_back(lShapeV4pair2);
+    lShapeV4.push_back(lShapeV4pair3);
+    lShapeV4.push_back(lShapeV4pair4);
+
+    lShapeList.push_back(lShapeV1);
+    lShapeList.push_back(lShapeV2);
+    lShapeList.push_back(lShapeV3);
+    lShapeList.push_back(lShapeV4);
+    
+    modelsVector.push_back(lShapeList);
+
+
+
+    
+    
     models = modelsVector;
 
-        
-//        if(version == v2){
-//
-//        }
-//        if(version == v3){
-//
-//        }
-//        if(version == v4){
-//
-//        }
-//
-//
-//    if(shape == tShape){
-//        for(int i = 0; i < yElements; i++){//y
-//            vector<Rect *>aRow;
-//
-//            for(int j = 0; j < xElements; j++){//x
-//                float x;
-//                float y;
-//                x = 1 + width * j + 0.007 * j;
-//                y = 1.0 - height * i - 0.007 * i;
-//                if((i==0 && j==1) || (i==1 && j==0) || (i==1 && j==1) || (i==1 && j==2)){
-//                    aRow.push_back(new Rect(x, y, width, height, 0, 0, 1));
-//                }
-//                else{
-//                    aRow.push_back(NULL);
-//                }
-//            }
-//            tMo.push_back(aRow);
-//        }
-//        tMosData = tMo;
-//    }
-//
-//    if(shape == mlShape){
-//        for(int i = 0; i < yElements; i++){//y
-//            vector<Rect *>aRow;
-//            for(int j = 0; j < xElements; j++){//x
-//                float x;
-//                float y;
-//                x = 1 + width * j + 0.007 * j;
-//                y = 1.0 - height * i - 0.007 * i;
-//                if((i==0 && j==0) || (i==0 && j==1) || (i==1 && j==1) || (i==2 && j==1)){
-//                    aRow.push_back(new Rect(x, y, width, height, 0, 0, 1));
-//                }
-//                else{
-//                    aRow.push_back(NULL);
-//                }
-//            }
-//            tMo.push_back(aRow);
-//        }
-//        tMosData = tMo;
-//    }
-//
-//    if(shape == sShape){
-//        for(int i = 0; i < yElements; i++){//y(vertically)
-//            vector<Rect *>aRow;
-//            for(int j = 0; j < xElements; j++){//x(horizontally)
-//                float x;
-//                float y;
-//                x = 1 + width * j + 0.007 * j;
-//                y = 1.0 - height * i - 0.007 * i;
-//                if((i==0 && j==1) || (i==1 && j==0) || (i==1 && j==1) || (i==2 && j==0)){
-//                    aRow.push_back(new Rect(x, y, width, height, 0, 0, 1));
-//                }
-//                else{
-//                    aRow.push_back(NULL);
-//                }
-//            }
-//            tMo.push_back(aRow);
-//        }
-//        tMosData = tMo;
-//   }
-//
-//    if(shape == zShape){
-//        for(int i = 0; i < 3; i++){//y(vertically)
-//            vector<Rect *>aRow;
-//            for(int j = 0; j < 2; j++){//x(horizontally)
-//                float x;
-//                float y;
-//                x = 1 + width * j + 0.007 * j;
-//                y = 1.0 - height * i - 0.007 * i;
-//                if((i==0 && j==0) || (i==1 && j==0) || (i==1 && j==1) || (i==2 && j==1)){
-//                    aRow.push_back(new Rect(x, y, width, height, 0, 0, 1));
-//                }
-//                else{
-//                    aRow.push_back(NULL);
-//                }
-//            }
-//            tMo.push_back(aRow);
-//        }
-//        tMosData = tMo;
-//    }
-//
-//   if(shape == lShape){
-//        for(int i = 0; i < 3; i++){//y
-//            vector<Rect *>aRow;
-//            for(int j = 0; j < 2; j++){//x
-//                float x;
-//                float y;
-//                x = 1 + width * j + 0.007 * j;
-//                y = 1.0 - height * i - 0.007 * i;
-//                if((i==0 && j==0) || (i==0 && j==1) || (i==1 && j==0) || (i==2 && j==0)){
-//                    aRow.push_back(new Rect(x, y, width, height, 0, 0, 1));
-//                }
-//                else{
-//                    aRow.push_back(NULL);
-//                }
-//            }
-//            tMo.push_back(aRow);
-//        }
-//        tMosData = tMo;
-//   }
-//
 //    if(shape == sqShape){
 //        for(int i = 0; i < yElements; i++){
 //            vector<Rect *>aRow;
@@ -220,6 +166,8 @@ Tetromino::Tetromino()
 //        }
 //        tMosData = tMo;
 //    }
+    
+
     
     for (int i = 0; i < models.at(shape).at(version).size();i++){
         int gx = models.at(shape).at(version).at(i)->getX();
