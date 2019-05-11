@@ -108,6 +108,7 @@ void Game::handleKeyDown(unsigned char key, float x, float y)
 {
     if (key == ' ')
     {
+        //rotate, change enum version
         up = true;
     }
     else if (key == 'p')
