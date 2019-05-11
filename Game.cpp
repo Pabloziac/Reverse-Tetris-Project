@@ -106,10 +106,26 @@ void Game::draw() const
 
 void Game::handleKeyDown(unsigned char key, float x, float y)
 {
-    if (key == ' ')
+    if (key == ' ') //rotating by switching the enum version.
     {
-        //rotate, change enum version
-        up = true;
+        tmos->clear();
+        cout << " tmo version " << tmos->version << endl;
+
+        if(tmos->version == v1){
+            tmos->version = v2;
+        }
+        else if(tmos->version == v2){
+            tmos->version = v3;
+        }
+        else if(tmos->version == v3){
+            tmos->version = v4;
+        }
+        else if(tmos->version == v4){
+            tmos->version = v1;
+        }
+
+        glutPostRedisplay();
+        //tmos->switchversion = false;
     }
     else if (key == 'p')
     {
