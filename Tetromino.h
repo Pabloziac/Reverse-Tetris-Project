@@ -17,7 +17,7 @@ class Tetromino{
     vector<vector<Rect *>> tMosData;
     tMoShape shape;
     tMoVersion version;
-    vector<vector<vector<Pairs *>>> models; 
+    vector<vector<vector<Pairs *>>> models;
     
 public:
     Tetromino();

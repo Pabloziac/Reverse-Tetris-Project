@@ -15,7 +15,7 @@ Tetromino::Tetromino()
     float width = 0.14;
     float height = 0.14;
     shape = tShape;
-    version = v1;
+    version = v3;
     
     // shape
     vector<vector<Rect *>> tMo;
@@ -36,21 +36,56 @@ Tetromino::Tetromino()
     vector<vector<Pairs *>> tShapeList;
     // tShape v1
     vector<Pairs *> tShapeV1;
-    Pairs* pair1 = new Pairs(0, 1);
-    Pairs* pair2 = new Pairs(1, 0);
-    Pairs* pair3 = new Pairs(1, 0);
-    Pairs* pair4 = new Pairs(1, 2);
+    vector<Pairs *> tShapeV2;
+    vector<Pairs *> tShapeV3;
+    vector<Pairs *> tShapeV4;
+    
+    Pairs* tShapeV1pair1 = new Pairs(0, 1);
+    Pairs* tShapeV1pair2 = new Pairs(1, 0);
+    Pairs* tShapeV1pair3 = new Pairs(1, 1);
+    Pairs* tShapeV1pair4 = new Pairs(1, 2);
+    
+    Pairs* tShapeV2pair1 = new Pairs(2, 1);
+    Pairs* tShapeV2pair2 = new Pairs(1, 1);
+    Pairs* tShapeV2pair3 = new Pairs(0, 1);
+    Pairs* tShapeV2pair4 = new Pairs(1, 2);
+    
+    Pairs* tShapeV3pair1 = new Pairs(1, 0);
+    Pairs* tShapeV3pair2 = new Pairs(1, 1);
+    Pairs* tShapeV3pair3 = new Pairs(1, 2);
+    Pairs* tShapeV3pair4 = new Pairs(2, 1);
+    
+    Pairs* tShapeV4pair1 = new Pairs(1, 0);
+    Pairs* tShapeV4pair2 = new Pairs(1, 1);
+    Pairs* tShapeV4pair3 = new Pairs(0, 1);
+    Pairs* tShapeV4pair4 = new Pairs(2, 1);
             
-    tShapeV1.push_back(pair1);
-    tShapeV1.push_back(pair2);
-    tShapeV1.push_back(pair3);
-    tShapeV1.push_back(pair4);
-            
-    cout << pair1->getX() << endl;
-    cout << pair1->getY() << endl;
+    tShapeV1.push_back(tShapeV1pair1);
+    tShapeV1.push_back(tShapeV1pair2);
+    tShapeV1.push_back(tShapeV1pair3);
+    tShapeV1.push_back(tShapeV1pair4);
+    
+    tShapeV2.push_back(tShapeV2pair1);
+    tShapeV2.push_back(tShapeV2pair2);
+    tShapeV2.push_back(tShapeV2pair3);
+    tShapeV2.push_back(tShapeV2pair4);
+    
+    tShapeV3.push_back(tShapeV3pair1);
+    tShapeV3.push_back(tShapeV3pair2);
+    tShapeV3.push_back(tShapeV3pair3);
+    tShapeV3.push_back(tShapeV3pair4);
+    
+    tShapeV4.push_back(tShapeV4pair1);
+    tShapeV4.push_back(tShapeV4pair2);
+    tShapeV4.push_back(tShapeV4pair3);
+    tShapeV4.push_back(tShapeV4pair4);
+    
     tShapeList.push_back(tShapeV1);
-    //this is the error.
-    modelsVector[shape].push_back(tShapeV1);
+    tShapeList.push_back(tShapeV2);
+    tShapeList.push_back(tShapeV3);
+    tShapeList.push_back(tShapeV4);
+    
+    modelsVector.push_back(tShapeList);
     cout << "here" << endl;
     models = modelsVector;
 
