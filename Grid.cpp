@@ -48,7 +48,9 @@ std::vector<int> Grid::ContainsFullRows()
             gridData.at(i).at(j);
         }
     }
+    return nums; 
 }
+
 void Grid::draw()
 {
     for (int i = 0; i < gridData.size(); i++)

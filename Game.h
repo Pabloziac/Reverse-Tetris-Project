@@ -5,11 +5,13 @@
 #include "AnimatedRect.h"
 #include "Timer.h"
 #include "Grid.h"
+#include "Tetromino.h"
 
 class Game: public AppComponent, private Timer{
     TexRect* mushroom;
     Rect* projectile;
     Grid* grid;
+    Tetromino* tmos;
     bool projectileVisible;
     bool mushroomVisible;
     bool up;

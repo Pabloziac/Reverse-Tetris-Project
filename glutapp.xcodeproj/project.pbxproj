@@ -21,6 +21,8 @@
 		17CBE741227B0DAB004179ED /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17CBE73F227B0DAB004179ED /* TextBox.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
 		17CBE744227B528C004179ED /* Ad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17CBE742227B528C004179ED /* Ad.cpp */; };
 		17FAB37B2278B0900024F60A /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17FAB3792278B0900024F60A /* Game.cpp */; settings = {COMPILER_FLAGS = "-w"; }; };
+		BACDA0D32286370E0031E45F /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BACDA0D12286370E0031E45F /* Grid.cpp */; };
+		BACDA0D622863BB20031E45F /* Tetromino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BACDA0D422863BB20031E45F /* Tetromino.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +64,10 @@
 		17CBE743227B528C004179ED /* Ad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ad.h; sourceTree = "<group>"; };
 		17FAB3792278B0900024F60A /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		17FAB37A2278B0900024F60A /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		BACDA0D12286370E0031E45F /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Grid.cpp; sourceTree = "<group>"; };
+		BACDA0D22286370E0031E45F /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		BACDA0D422863BB20031E45F /* Tetromino.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tetromino.cpp; sourceTree = "<group>"; };
+		BACDA0D522863BB20031E45F /* Tetromino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tetromino.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +103,14 @@
 				17609DCD219CA02D00F85383 /* Timer.h */,
 				17609DCC219CA02D00F85383 /* Timer.cpp */,
 				17CBE73D227B0CF6004179ED /* Shape.h */,
+				BACDA0D12286370E0031E45F /* Grid.cpp */,
+				BACDA0D22286370E0031E45F /* Grid.h */,
 				17CBE73F227B0DAB004179ED /* TextBox.cpp */,
 				17CBE740227B0DAB004179ED /* TextBox.h */,
 				17609DC1219C098400F85383 /* Rect.h */,
 				17609DC0219C098400F85383 /* Rect.cpp */,
+				BACDA0D422863BB20031E45F /* Tetromino.cpp */,
+				BACDA0D522863BB20031E45F /* Tetromino.h */,
 				17609DC4219C0DE800F85383 /* TexRect.h */,
 				17609DC3219C0DE800F85383 /* TexRect.cpp */,
 				17609DC9219C9C3E00F85383 /* AnimatedRect.cpp */,
@@ -166,6 +176,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 173FEEF81AA63A07006CCB85;
@@ -190,9 +201,11 @@
 				17FAB37B2278B0900024F60A /* Game.cpp in Sources */,
 				1727D28C219145520048CB99 /* GlutApp.cpp in Sources */,
 				17609DC2219C098400F85383 /* Rect.cpp in Sources */,
+				BACDA0D622863BB20031E45F /* Tetromino.cpp in Sources */,
 				17609DCE219CA02D00F85383 /* Timer.cpp in Sources */,
 				17CBE741227B0DAB004179ED /* TextBox.cpp in Sources */,
 				17609DC5219C0DE800F85383 /* TexRect.cpp in Sources */,
+				BACDA0D32286370E0031E45F /* Grid.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
