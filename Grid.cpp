@@ -10,7 +10,7 @@ Grid::Grid()
     deletingState = notDeleting;
     deletingRowIndex = 0;
 
-    yElements = 13;
+    yElements = 1;
     xElements = 13;
     rectWidth = 0.14;
     rectHeight = 0.14;

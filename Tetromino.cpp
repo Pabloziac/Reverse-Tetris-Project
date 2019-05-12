@@ -441,8 +441,8 @@ void Tetromino::draw(){
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
         
-        float x = 1 + width * gx + 0.007 * gx + xoffset;
-        float y = 1.0 - height * gy - 0.007 * gy + yoffset;
+        float x = -1.5 + width * gx + 0.007 * gx + xoffset;
+        float y = 0.0 - height * gy - 0.007 * gy + yoffset;
         
         tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1);
     }
