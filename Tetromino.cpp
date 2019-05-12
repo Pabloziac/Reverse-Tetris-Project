@@ -15,6 +15,8 @@ Tetromino::Tetromino()
     int xElements = 4;
     float width = 0.14;
     float height = 0.14;
+    xoffset = 0;
+    yoffset = 0;
     shape = iShape;
     version = v1;
     
@@ -439,8 +441,8 @@ void Tetromino::draw(){
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
         
-        float x = 1 + width * gx + 0.007 * gx;
-        float y = 1.0 - height * gy - 0.007 * gy;
+        float x = 1 + width * gx + 0.007 * gx + xoffset;
+        float y = 1.0 - height * gy - 0.007 * gy + yoffset;
         
         tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1);
     }
@@ -456,7 +458,7 @@ void Tetromino::draw(){
 
 }
 void Tetromino::clear(){
-    cout << "cleared" <<endl;
+    //cout << "cleared" <<endl;
     float width = 0.14;
     float height = 0.14;
     
