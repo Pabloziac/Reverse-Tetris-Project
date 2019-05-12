@@ -447,20 +447,32 @@ void Tetromino::draw()
         }
     }
 }
+void Tetromino::shiftOffset()
+{
+    for (int i = 0; i < models.at(shape).at(version).size(); i++)
+    {
+        int gx = models.at(shape).at(version).at(i)->getX();
+        int gy = models.at(shape).at(version).at(i)->getY();
 
+        float x = -1.5 + width * gx + 0.007 * gx + xoffset;
+        float y = 0.0 - height * gy - 0.007 * gy + yoffset;
+
+        tMosData[gy][gx]->setX(x);
+        tMosData[gy][gx]->setY(y);
+    }
+}
 
 void Tetromino::shiftOffsetY(float val)
 {
     yoffset += val;
-    clear(); 
-    setupFrame(); 
+    shiftOffset();
 }
 
 void Tetromino::shiftOffsetX(float val)
 {
     xoffset += val;
-    clear(); 
-    setupFrame();
+    clear();
+    shiftOffset();
 }
 
 void Tetromino::nextVersion()
@@ -511,8 +523,8 @@ void Tetromino::nextAction()
     else
     {
         // move up
-        shiftOffsetY(0.0004); 
     }
+    shiftOffsetY(0.00004);
 }
 
 Tetromino::~Tetromino()

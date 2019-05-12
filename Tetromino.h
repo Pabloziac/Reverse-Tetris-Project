@@ -56,7 +56,8 @@ public:
     void setupFrame();
     void nextAction();
     bool touchedBoundary();
-    void nextVersion(); 
+    void nextVersion();
+    void shiftOffset(); 
     void shiftOffsetX(float val);
     void shiftOffsetY(float val);
 
