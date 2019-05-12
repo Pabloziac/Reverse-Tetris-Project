@@ -445,8 +445,28 @@ void Tetromino::draw(){
         float x = 1 + width * gx + 0.007 * gx + xoffset;
         float y = 1.0 - height * gy - 0.007 * gy + yoffset;
         
+        if(shape == 0){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, .8);
+        }
+        if(shape == 1){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0, .4, 1);
+        }
+        if(shape == 2){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0.7, 0, 0.2);
+        }
+        if(shape == 3){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0.75, 0, 0);
+        }
+        if(shape == 4){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 1, 0.5, 0);
+        }
+        if(shape == 5){
+            tMosData[gy][gx] = new Rect(x, y, width, height, .3, .5, 1);
+        }
+        if(shape == 6){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0.5, 0, 0.5);
+        }
         
-        tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1);
     }
 
     for(int i = 0; i < tMosData.size(); i++){
@@ -467,8 +487,8 @@ void Tetromino::clear(){
     for (int i = 0; i < models.at(shape).at(version).size();i++){
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
-        float x = 1 + width * gx + 0.007 * gx;
-        float y = 1.0 - height * gy - 0.007 * gy;
+        float x = 1 + width * gx + 0.007 * gx + xoffset;
+        float y = 1.0 - height * gy - 0.007 * gy + yoffset;
         
         tMosData[gy][gx] = NULL;
     }
