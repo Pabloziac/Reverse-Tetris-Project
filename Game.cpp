@@ -62,19 +62,19 @@ void Game::handleKeyDown(unsigned char key, float x, float y)
     else if (key == 'a')
     {
         //move tetromino left as long as within screen and no collision
-        tmos->setOffsetX(-0.147);
+        tmos->shiftOffsetX(-0.147);
         glutPostRedisplay();
     }
     else if (key == 's')
     {
         //move down
-        tmos->setOffsetY(-0.147);
+        tmos->shiftOffsetY(-0.147);
         glutPostRedisplay();
     }
     else if (key == 'd')
     {
         //move right
-        tmos->setOffsetX(0.147);
+        tmos->shiftOffsetX(0.147);
         glutPostRedisplay();
         
     }

@@ -57,8 +57,8 @@ public:
     void nextAction();
     bool touchedBoundary();
     void nextVersion(); 
-    void setOffsetX(float val);
-    void setOffsetY(float val);
+    void shiftOffsetX(float val);
+    void shiftOffsetY(float val);
 
     ~Tetromino();
 };

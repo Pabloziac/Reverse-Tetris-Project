@@ -448,14 +448,19 @@ void Tetromino::draw()
     }
 }
 
-void Tetromino::setOffsetY(float val)
+
+void Tetromino::shiftOffsetY(float val)
 {
     yoffset += val;
+    clear(); 
+    setupFrame(); 
 }
 
-void Tetromino::setOffsetX(float val)
+void Tetromino::shiftOffsetX(float val)
 {
     xoffset += val;
+    clear(); 
+    setupFrame();
 }
 
 void Tetromino::nextVersion()
@@ -506,6 +511,7 @@ void Tetromino::nextAction()
     else
     {
         // move up
+        shiftOffsetY(0.0004); 
     }
 }
 
