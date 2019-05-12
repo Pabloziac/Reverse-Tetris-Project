@@ -11,11 +11,13 @@ using namespace std;
 Tetromino::Tetromino()
 {
     switchversion = false;
+    xoffset = 0;
+    yoffset = 0;
     int yElements = 4;
     int xElements = 4;
     float width = 0.14;
     float height = 0.14;
-    shape = iShape;
+    shape = zShape;
     version = v1;
     
     // shape
@@ -434,13 +436,15 @@ void Tetromino::draw(){
 //    cout << " drawing " << endl;
     float width = 0.14;
     float height = 0.14;
+    
         
     for (int i = 0; i < models.at(shape).at(version).size();i++){
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
         
-        float x = 1 + width * gx + 0.007 * gx;
-        float y = 1.0 - height * gy - 0.007 * gy;
+        float x = 1 + width * gx + 0.007 * gx + xoffset;
+        float y = 1.0 - height * gy - 0.007 * gy + yoffset;
+        
         
         tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1);
     }
@@ -456,14 +460,13 @@ void Tetromino::draw(){
 
 }
 void Tetromino::clear(){
-    cout << "cleared" <<endl;
+    //cout << "cleared" <<endl;
     float width = 0.14;
     float height = 0.14;
     
     for (int i = 0; i < models.at(shape).at(version).size();i++){
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
-        
         float x = 1 + width * gx + 0.007 * gx;
         float y = 1.0 - height * gy - 0.007 * gy;
         

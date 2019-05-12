@@ -10,29 +10,29 @@
 
 Pairs::Pairs(){
 }
-Pairs::Pairs(int x, int y){
+Pairs::Pairs(float x, float y){
     this->x = x;
     this->y = y;
 }
 
-int Pairs::getX(){
+float Pairs::getX(){
     return x;
 }
 
-int Pairs::getY(){
+float Pairs::getY(){
     return y;
 }
 
-void Pairs::setPair(int x, int y){
+void Pairs::setPair(float x, float y){
     this->x = x;
     this->y = y;
 }
 
-void Pairs::setX(int x){
+void Pairs::setX(float x){
     this->x = x;
 }
 
-void Pairs::setY(int y){
+void Pairs::setY(float y){
     this->y = y;
 }
 

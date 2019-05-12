@@ -21,6 +21,10 @@ public:
     tMoVersion version;
     vector<vector<vector<Pairs *>>> models;
     
+    Pairs* pos;
+    float xoffset;
+    float yoffset;
+    
     Tetromino();
     void draw();
     void clear();

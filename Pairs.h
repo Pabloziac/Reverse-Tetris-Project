@@ -6,18 +6,18 @@
 
 class Pairs{
 private:
-    int x;
-    int y;
+    float x;
+    float y;
     
 public:
     Pairs();
-    Pairs(int, int);
+    Pairs(float, float);
     Pairs getPair();
-    void setPair(int, int);
-    void setX(int);
-    void setY(int);
-    int getX();
-    int getY();
+    void setPair(float, float);
+    void setX(float);
+    void setY(float);
+    float getX();
+    float getY();
     ~Pairs();
 };
 
