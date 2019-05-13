@@ -60,8 +60,8 @@ Tetromino::Tetromino()
     Pairs *tShapeV2pair3 = new Pairs(0, 1);
     Pairs *tShapeV2pair4 = new Pairs(1, 2);
 
-    Pairs *tShapeV3pair1 = new Pairs(0, 0);
-    Pairs *tShapeV3pair2 = new Pairs(1, 0);
+    Pairs *tShapeV3pair1 = new Pairs(0, 1);
+    Pairs *tShapeV3pair2 = new Pairs(1, 0); 
     Pairs *tShapeV3pair3 = new Pairs(1, 1);
     Pairs *tShapeV3pair4 = new Pairs(1, 2);
 
@@ -437,6 +437,27 @@ void Tetromino::setupFrame()
         float y = 0.0 - height * gy - 0.007 * gy + yoffset;
 
         tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1);
+        if(shape == 0){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, .8);
+        }
+        if(shape == 1){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0, .4, 1);
+        }
+        if(shape == 2){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0.7, 0, 0.2);
+        }
+        if(shape == 3){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0.75, 0, 0);
+        }
+        if(shape == 4){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 1, 0.5, 0);
+        }
+        if(shape == 5){
+            tMosData[gy][gx] = new Rect(x, y, width, height, .3, .5, 1);
+        }
+        if(shape == 6){
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0.5, 0, 0.5);
+        }
     }
 }
 void Tetromino::draw()
