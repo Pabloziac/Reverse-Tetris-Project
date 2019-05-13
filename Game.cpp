@@ -30,7 +30,6 @@ Game::Game()
     setRate(1);
     start();
     tmos = new Tetromino();
-
 }
 
 void Game::action()
@@ -45,18 +44,48 @@ void Game::draw() const
     tmos->draw();
     grid->draw();
 }
+void Game::handleSpecialKeyDown(int key, float a, float b)
+{
+    if (key == GLUT_KEY_LEFT)
+    {
+        //move tetromino left as long as within screen and no collision
+        cout << "left" << endl;
+        tmos->shiftOffsetX(-0.147);
+        glutPostRedisplay();
+    }
+    else if (key == GLUT_KEY_DOWN)
+    {
+        cout << "down" << endl;
+        tmos->shiftOffsetY(-0.147);
+        glutPostRedisplay();
+    }
+    else if (key == GLUT_KEY_RIGHT)
+    {
+        cout << "right" << endl;
+        tmos->shiftOffsetX(0.147);
+        glutPostRedisplay();
+    }
+    else if (key == GLUT_KEY_UP)
+    {
+        cout << "up" << endl;
+        tmos->shiftOffsetY(0.147);
+        glutPostRedisplay();
+    }
+}
 
 void Game::handleKeyDown(unsigned char key, float x, float y)
 {
-    cout << "Keyboard pressed: " << int(key) << endl; 
+    int k = key;
+    cout << "Keyboard pressed: " << key << endl;
+    cout << "Left key " << GLUT_KEY_LEFT << endl;
     if (key == ' ') //rotating by switching the enum version.
     {
-        tmos->nextVersion();    
+        tmos->nextVersion();
     }
     else if (key == 'a')
     {
         //move tetromino left as long as within screen and no collision
-        cout << "left" << endl; 
+        cout << "left" << endl;
         tmos->shiftOffsetX(-0.147);
         glutPostRedisplay();
     }
@@ -68,17 +97,15 @@ void Game::handleKeyDown(unsigned char key, float x, float y)
     }
     else if (key == 'd')
     {
-        cout << "right" << endl; 
+        cout << "right" << endl;
         tmos->shiftOffsetX(0.147);
         glutPostRedisplay();
-        
     }
     else if (key == 'w')
     {
-        cout << "up" << endl; 
+        cout << "up" << endl;
         tmos->shiftOffsetY(0.147);
         glutPostRedisplay();
-        
     }
 }
 

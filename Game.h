@@ -7,11 +7,12 @@
 #include "Grid.h"
 #include "Tetromino.h"
 
-class Game: public AppComponent, private Timer{
-    TexRect* mushroom;
-    Rect* projectile;
-    Grid* grid;
-    Tetromino* tmos;
+class Game : public AppComponent, private Timer
+{
+    TexRect *mushroom;
+    Rect *projectile;
+    Grid *grid;
+    Tetromino *tmos;
     bool projectileVisible;
     bool mushroomVisible;
     bool up;
@@ -26,6 +27,7 @@ public:
 
     void draw() const;
     void handleKeyDown(unsigned char, float, float);
+    void handleSpecialKeyDown(int, float, float);
     void continueMovingRects();
     void action();
     ~Game();

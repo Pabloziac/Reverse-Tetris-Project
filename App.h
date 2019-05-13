@@ -21,6 +21,7 @@ public:
     
     void draw() const;
     
+    void specialKeyDown(int, float, float); 
     void keyDown(unsigned char key, float x, float y);
     
     ~App();
