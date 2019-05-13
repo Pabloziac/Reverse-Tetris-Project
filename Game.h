@@ -6,6 +6,7 @@
 #include "Timer.h"
 #include "Grid.h"
 #include "Tetromino.h"
+#include "TextBox.h"
 
 class Game : public AppComponent, private Timer
 {
@@ -13,6 +14,7 @@ class Game : public AppComponent, private Timer
     Rect *projectile;
     Grid *grid;
     Tetromino *tmos;
+    TextBox* scoreBoard;
     bool projectileVisible;
     bool mushroomVisible;
     bool up;

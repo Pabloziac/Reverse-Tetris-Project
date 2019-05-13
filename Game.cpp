@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "Grid.h"
 #include "Tetromino.h"
+#include "TextBox.h"
 using namespace std;
 
 Game::Game()
@@ -24,10 +25,12 @@ Game::Game()
     shroomFileName = "mushroom.png";
     fireballFileName = "fireball.bmp";
 #endif
-
+    
     tmos = new Tetromino();
     grid = new Grid();
     grid->deleteRow(4);
+    char* text = "S C O R E : 0";
+    scoreBoard = new TextBox(text, 0.6, 0.8, GLUT_BITMAP_HELVETICA_18, 0.6, 0.0, 0.9, 800);
     setRate(1);
     start();
 }
@@ -42,6 +45,7 @@ void Game::draw() const
 {
     tmos->draw();
     grid->draw();
+    scoreBoard->draw();
 }
 void Game::handleSpecialKeyDown(int key, float a, float b)
 {
