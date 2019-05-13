@@ -13,7 +13,7 @@ Tetromino::Tetromino()
 
     // generate random state; 
     srand(time(NULL));
-    int s = rand() % 4;
+    int s = rand() % 7;
     int v = rand() % 4;
     
     switchversion = false;
