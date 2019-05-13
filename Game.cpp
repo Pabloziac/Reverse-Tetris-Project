@@ -38,13 +38,6 @@ void Game::action()
 
     grid->continueMovingRects();
     tmos->nextAction();
-    // if (grid->getAt(12, 12)->getX() < 1.0)
-    // {
-    //     grid->getAt(12, 12)->setX(grid->getAt(12, 12)->getX() + 0.001);
-    // }
-    // if (hit){
-    //     explosion->setY(explosion->getY()-0.0001);
-    // }
 }
 
 void Game::draw() const
@@ -55,6 +48,7 @@ void Game::draw() const
 
 void Game::handleKeyDown(unsigned char key, float x, float y)
 {
+    cout << "Keyboard pressed: " << int(key) << endl; 
     if (key == ' ') //rotating by switching the enum version.
     {
         tmos->nextVersion();    
@@ -68,16 +62,21 @@ void Game::handleKeyDown(unsigned char key, float x, float y)
     }
     else if (key == 's')
     {
-        //move down
         cout << "down" << endl;
         tmos->shiftOffsetY(-0.147);
         glutPostRedisplay();
     }
     else if (key == 'd')
     {
-        //move right
-        cout << "down" << endl; 
+        cout << "right" << endl; 
         tmos->shiftOffsetX(0.147);
+        glutPostRedisplay();
+        
+    }
+    else if (key == 'w')
+    {
+        cout << "up" << endl; 
+        tmos->shiftOffsetY(0.147);
         glutPostRedisplay();
         
     }

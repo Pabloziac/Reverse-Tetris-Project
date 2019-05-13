@@ -471,7 +471,6 @@ void Tetromino::shiftOffsetY(float val)
 void Tetromino::shiftOffsetX(float val)
 {
     xoffset += val;
-    clear();
     shiftOffset();
 }
 
@@ -524,7 +523,7 @@ void Tetromino::nextAction()
     {
         // move up
     }
-    shiftOffsetY(0.00004);
+    shiftOffsetY(0.0001);
 }
 
 Tetromino::~Tetromino()
