@@ -466,7 +466,7 @@ void Tetromino::shiftOffsetX(float val)
 void Tetromino::nextVersion()
 {
     clear();
-    cout << " tmo version " << version << endl;
+    //cout << " tmo version " << version << endl;
 
     if (version == v1)
     {

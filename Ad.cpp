@@ -2,13 +2,13 @@
 #include <string>
 
 Ad::Ad(const char* text, const char* url){
-    textbox = new TextBox(text, -0.3, 0.9);
+    //textbox = new TextBox(text, -0.3, 0.9);
     this->url = url;
 }
 
 
 void Ad::draw() const {
-    textbox->draw();
+    textbox->draw(0);
 }
 
 void Ad::handleKeyDown(unsigned char key, float x, float y) {

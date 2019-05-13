@@ -6,12 +6,14 @@
 #include "Timer.h"
 #include "Grid.h"
 #include "Tetromino.h"
+#include "TextBox.h"
 
 class Game: public AppComponent, private Timer{
     TexRect* mushroom;
     Rect* projectile;
     Grid* grid;
     Tetromino* tmos;
+    TextBox* scoreBoard;
     bool projectileVisible;
     bool mushroomVisible;
     bool up;
@@ -19,6 +21,7 @@ class Game: public AppComponent, private Timer{
     bool hit;
     float theta;
     float deg;
+    int score;
 
 public:
     AnimatedRect *explosion;

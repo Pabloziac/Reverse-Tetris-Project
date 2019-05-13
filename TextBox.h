@@ -14,20 +14,23 @@ class TextBox: public Shape {
     float g;
     float b;
     int width;
+    int score;
 public:
     TextBox(
             
-            const char* = "My TextBox",
+            char* = "My TextBox",
             float = 0,
             float = 0,
             void* = GLUT_BITMAP_HELVETICA_18,
             float = 1,
             float = 1,
             float = 1,
-            int = 800
+            int = 800,
+            int = 0
     );
     
     void draw() const;
+    void draw(int x);
 };
 
 #endif /* TextBox_hpp */
