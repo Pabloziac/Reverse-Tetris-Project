@@ -133,6 +133,10 @@ void Grid::continueMovingRects()
     }
 }
 
+bool Grid::tetrominoDidHitBoundary(Tetromino *to){
+    // to->()    
+}
+
 Grid::~Grid()
 {
 }

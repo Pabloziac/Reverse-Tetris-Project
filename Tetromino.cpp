@@ -1,15 +1,21 @@
 
 #include <vector>
+#include <stdlib.h>
 #include "Rect.h"
 #include "Shape.h"
 #include "Tetromino.h"
 #include "Pairs.h"
-#include <tuple>
 
 using namespace std;
 
 Tetromino::Tetromino()
 {
+
+    // generate random state; 
+    srand(time(NULL));
+    int s = rand() % 4;
+    int v = rand() % 4;
+    
     switchversion = false;
     int yElements = 4;
     int xElements = 4;
@@ -17,8 +23,8 @@ Tetromino::Tetromino()
     height = 0.14;
     xoffset = 0;
     yoffset = 0;
-    shape = iShape;
-    version = v1;
+    shape = (tMoShape)s;
+    version = (tMoVersion)v;
 
     // shape
     vector<vector<Rect *>> tMo;

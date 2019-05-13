@@ -25,15 +25,14 @@ Game::Game()
     fireballFileName = "fireball.bmp";
 #endif
 
+    tmos = new Tetromino();
     grid = new Grid();
     grid->deleteRow(4);
     setRate(1);
     start();
-    tmos = new Tetromino();
 }
 
-void Game::action()
-{
+void Game::action(){
 
     grid->continueMovingRects();
     tmos->nextAction();

@@ -24,7 +24,6 @@ class Game : public AppComponent, private Timer
 public:
     AnimatedRect *explosion;
     Game();
-
     void draw() const;
     void handleKeyDown(unsigned char, float, float);
     void handleSpecialKeyDown(int, float, float);

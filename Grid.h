@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "Rect.h"
+#include "Tetromino.h"
 enum State
 {
     deletingARow,
@@ -28,9 +29,10 @@ private:
     float rectWidth;
     float rectHeight;
 
+    Tetromino *tmos;
+
 public:
-    std::vector<std::vector<Rect *>>
-        gridData;
+    std::vector<std::vector<Rect *>> gridData;
     Grid();
     void Print();
     void draw();
@@ -38,7 +40,7 @@ public:
     Rect *getAt(int x, int y);
     void deleteRow(int i);
     void resetGrid();
-    
+    bool tetrominoDidHitBoundary(Tetromino *);
     void continueMovingRects();
     ~Grid();
 };
