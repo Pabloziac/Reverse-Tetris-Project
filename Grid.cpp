@@ -10,7 +10,7 @@ Grid::Grid()
     deletingState = notDeleting;
     deletingRowIndex = 0;
 
-    yElements = 1;
+    yElements = 13;
     xElements = 13;
     rectWidth = 0.14;
     rectHeight = 0.14;
@@ -28,8 +28,8 @@ void Grid::resetGrid()
         {
             float x;
             float y;
-            x = -1.5 + rectWidth * j + 0.007 * j;
-            y = 1.0 - rectHeight * i - 0.007 * i;
+            x = -1.5 + rectWidth * j + 0.006 * j;
+            y = 1.0 - rectHeight * i - 0.006 * i;
             aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
         }
         gridData.push_back(aRow);

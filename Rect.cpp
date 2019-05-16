@@ -81,7 +81,7 @@ bool Rect::contains(float px, float py) const
 
 bool Rect::touchesBottomEdge(Rect *fromBottomRect)
 {
-    return (y - h - 0.007) <= fromBottomRect->getY();
+    return (y - h - 0.006) <= fromBottomRect->getY();
 }
 void Rect::draw() const
 {

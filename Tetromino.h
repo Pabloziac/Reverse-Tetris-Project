@@ -15,7 +15,8 @@ enum tMoShape
     sShape,
     zShape,
     sqShape,
-    iShape
+    iShape,
+    testShape
 };
 enum Color
 {
@@ -36,7 +37,6 @@ using namespace std;
 class Tetromino
 {
 public:
-    bool switchversion;
     vector<vector<Rect *>> tMosData;
     tMoShape shape;
     tMoVersion version;
@@ -48,19 +48,21 @@ public:
     float xoffset;
     float yoffset;
 
+    int gi; 
+    int gj; 
+
     Tetromino();
     void draw();
     void clear();
     void rotate();
     bool validPos();
     void setupFrame();
-    void nextAction();
+    void nextAction(int, int);
     bool touchedBoundary();
     void nextVersion();
-    void shiftOffset(); 
+    void shiftOffset();
     void shiftOffsetX(float val);
     void shiftOffsetY(float val);
-
     ~Tetromino();
 };
 

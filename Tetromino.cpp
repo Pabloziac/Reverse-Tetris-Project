@@ -11,20 +11,27 @@ using namespace std;
 Tetromino::Tetromino()
 {
 
-    // generate random state; 
+    // generate random state;
     srand(time(NULL));
     int s = rand() % 7;
     int v = rand() % 4;
-    
-    switchversion = false;
+
     int yElements = 4;
     int xElements = 4;
+
     width = 0.14;
     height = 0.14;
     xoffset = 0;
     yoffset = 0;
-    shape = (tMoShape)s;
-    version = (tMoVersion)v;
+
+    gi = 5;
+    gj = 5;
+
+    // shape = (tMoShape)s;
+    // version = (tMoVersion)v;
+
+    shape = testShape;
+    version = v4;
 
     // shape
     vector<vector<Rect *>> tMo;
@@ -61,7 +68,7 @@ Tetromino::Tetromino()
     Pairs *tShapeV2pair4 = new Pairs(1, 2);
 
     Pairs *tShapeV3pair1 = new Pairs(0, 1);
-    Pairs *tShapeV3pair2 = new Pairs(1, 0); 
+    Pairs *tShapeV3pair2 = new Pairs(1, 0);
     Pairs *tShapeV3pair3 = new Pairs(1, 1);
     Pairs *tShapeV3pair4 = new Pairs(1, 2);
 
@@ -421,6 +428,23 @@ Tetromino::Tetromino()
 
     modelsVector.push_back(iShapeList);
 
+    // testing shape
+    vector<vector<Pairs *>> testShapeList;
+
+    for (int l = 0; l < 4; l++)
+    {
+        vector<Pairs *> testShapePairs;
+        for (int k = 0; k < 4; k++)
+        {
+            for (int g = 0; g < 4; g++)
+            {
+                testShapePairs.push_back(new Pairs(k, g));
+            }
+        }
+        testShapeList.push_back(testShapePairs);
+    }
+    modelsVector.push_back(testShapeList);
+
     models = modelsVector;
 
     setupFrame();
@@ -433,33 +457,41 @@ void Tetromino::setupFrame()
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
 
-        float x = -1.5 + width * gx + 0.007 * gx + xoffset;
-        float y = 0.0 - height * gy - 0.007 * gy + yoffset;
+        float x = -1.5 + (gx + gi) * (width + 0.006);
+        float y = 1.0 - (gy + gj) * (height + 0.006);
 
         tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1);
-        if(shape == 0){
+        if (shape == 0)
+        {
             tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, .8);
         }
-        if(shape == 1){
+        if (shape == 1)
+        {
             tMosData[gy][gx] = new Rect(x, y, width, height, 0, .4, 1);
         }
-        if(shape == 2){
+        if (shape == 2)
+        {
             tMosData[gy][gx] = new Rect(x, y, width, height, 0.7, 0, 0.2);
         }
-        if(shape == 3){
+        if (shape == 3)
+        {
             tMosData[gy][gx] = new Rect(x, y, width, height, 0.75, 0, 0);
         }
-        if(shape == 4){
+        if (shape == 4)
+        {
             tMosData[gy][gx] = new Rect(x, y, width, height, 1, 0.5, 0);
         }
-        if(shape == 5){
+        if (shape == 5)
+        {
             tMosData[gy][gx] = new Rect(x, y, width, height, .3, .5, 1);
         }
-        if(shape == 6){
+        if (shape == 6)
+        {
             tMosData[gy][gx] = new Rect(x, y, width, height, 0.5, 0, 0.5);
         }
     }
 }
+
 void Tetromino::draw()
 {
     for (int i = 0; i < tMosData.size(); i++)
@@ -474,6 +506,7 @@ void Tetromino::draw()
         }
     }
 }
+
 void Tetromino::shiftOffset()
 {
     for (int i = 0; i < models.at(shape).at(version).size(); i++)
@@ -481,8 +514,8 @@ void Tetromino::shiftOffset()
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
 
-        float x = -1.5 + width * gx + 0.007 * gx + xoffset;
-        float y = 0.0 - height * gy - 0.007 * gy + yoffset;
+        float x = -1.5 + (gx + gi) * (width + 0.006);
+        float y = 1.0 - (gy + gj) * (height + 0.006);
 
         tMosData[gy][gx]->setX(x);
         tMosData[gy][gx]->setY(y);
@@ -491,13 +524,13 @@ void Tetromino::shiftOffset()
 
 void Tetromino::shiftOffsetY(float val)
 {
-    yoffset += val;
+    gj -= val;
     shiftOffset();
 }
 
 void Tetromino::shiftOffsetX(float val)
 {
-    xoffset += val;
+    gi += val;
     shiftOffset();
 }
 
@@ -527,7 +560,7 @@ void Tetromino::nextVersion()
 }
 void Tetromino::clear()
 {
-    //cout << "cleared" <<endl;
+    // cout << "cleared" << endl;
     for (int i = 0; i < models.at(shape).at(version).size(); i++)
     {
         int gx = models.at(shape).at(version).at(i)->getX();
@@ -536,11 +569,13 @@ void Tetromino::clear()
         tMosData[gy][gx] = NULL;
     }
 }
+
 bool Tetromino::touchedBoundary()
 {
     return true;
 }
-void Tetromino::nextAction()
+
+void Tetromino::nextAction(int ticks, int resetAt)
 {
     if (touchedBoundary())
     {
@@ -550,7 +585,10 @@ void Tetromino::nextAction()
     {
         // move up
     }
-    shiftOffsetY(0.0001);
+    if (ticks == resetAt)
+    {
+        // shiftOffsetY(0.147);
+    }
 }
 
 Tetromino::~Tetromino()
