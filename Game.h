@@ -16,7 +16,7 @@ class Game : public AppComponent, private Timer
     Tetromino *tmos;
     TextBox* scoreBoard;
     int tickCounts; 
-    int const resetAt = 4000;
+    int const resetAt = 1000;
     bool projectileVisible;
     bool mushroomVisible;
     bool up;

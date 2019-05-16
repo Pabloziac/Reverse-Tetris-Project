@@ -38,7 +38,7 @@ Game::Game()
 void Game::action()
 {
     grid->continueMovingRects();
-    tmos->nextAction(tickCounts, resetAt);
+    tmos->nextAction(grid, tickCounts, resetAt);
     if (resetAt == tickCounts)
     {
         tickCounts = 0;

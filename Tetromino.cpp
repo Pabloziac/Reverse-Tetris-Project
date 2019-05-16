@@ -5,6 +5,7 @@
 #include "Shape.h"
 #include "Tetromino.h"
 #include "Pairs.h"
+#include "Grid.h"
 
 using namespace std;
 
@@ -25,13 +26,10 @@ Tetromino::Tetromino()
     yoffset = 0;
 
     gi = 5;
-    gj = 5;
+    gj = 11;
 
-    // shape = (tMoShape)s;
-    // version = (tMoVersion)v;
-
-    shape = testShape;
-    version = v4;
+    shape = (tMoShape)s;
+    version = (tMoVersion)v;
 
     // shape
     vector<vector<Rect *>> tMo;
@@ -46,7 +44,16 @@ Tetromino::Tetromino()
     }
     tMosData = tMo;
 
-    vector<vector<vector<Pairs *>>> modelsVector;
+    vector<vector<vector<Pairs *>>> models;
+    models = models;
+
+    generateModels();
+
+    setupFrame();
+}
+
+void Tetromino::generateModels()
+{
 
     //    vector of pairs  = models.at(shape).at(version)
 
@@ -102,7 +109,7 @@ Tetromino::Tetromino()
     tShapeList.push_back(tShapeV3);
     tShapeList.push_back(tShapeV4);
 
-    modelsVector.push_back(tShapeList);
+    models.push_back(tShapeList);
 
     vector<vector<Pairs *>> lShapeList;
     // lShape shape=1
@@ -156,7 +163,7 @@ Tetromino::Tetromino()
     lShapeList.push_back(lShapeV3);
     lShapeList.push_back(lShapeV4);
 
-    modelsVector.push_back(lShapeList);
+    models.push_back(lShapeList);
 
     vector<vector<Pairs *>> mlShapeList;
     // mlShape shape=2
@@ -210,7 +217,7 @@ Tetromino::Tetromino()
     mlShapeList.push_back(mlShapeV3);
     mlShapeList.push_back(mlShapeV4);
 
-    modelsVector.push_back(mlShapeList);
+    models.push_back(mlShapeList);
 
     vector<vector<Pairs *>> sShapeList;
     // sShape shape=3
@@ -264,7 +271,7 @@ Tetromino::Tetromino()
     sShapeList.push_back(sShapeV3);
     sShapeList.push_back(sShapeV4);
 
-    modelsVector.push_back(sShapeList);
+    models.push_back(sShapeList);
 
     vector<vector<Pairs *>> zShapeList;
     // zShape shape=4
@@ -318,7 +325,7 @@ Tetromino::Tetromino()
     zShapeList.push_back(zShapeV3);
     zShapeList.push_back(zShapeV4);
 
-    modelsVector.push_back(zShapeList);
+    models.push_back(zShapeList);
 
     vector<vector<Pairs *>> sqShapeList;
     // sqShape shape=5
@@ -372,7 +379,7 @@ Tetromino::Tetromino()
     sqShapeList.push_back(sqShapeV3);
     sqShapeList.push_back(sqShapeV4);
 
-    modelsVector.push_back(sqShapeList);
+    models.push_back(sqShapeList);
 
     vector<vector<Pairs *>> iShapeList;
     // iShape shape=6
@@ -426,28 +433,24 @@ Tetromino::Tetromino()
     iShapeList.push_back(iShapeV3);
     iShapeList.push_back(iShapeV4);
 
-    modelsVector.push_back(iShapeList);
+    models.push_back(iShapeList);
 
     // testing shape
-    vector<vector<Pairs *>> testShapeList;
+    // vector<vector<Pairs *>> testShapeList;
 
-    for (int l = 0; l < 4; l++)
-    {
-        vector<Pairs *> testShapePairs;
-        for (int k = 0; k < 4; k++)
-        {
-            for (int g = 0; g < 4; g++)
-            {
-                testShapePairs.push_back(new Pairs(k, g));
-            }
-        }
-        testShapeList.push_back(testShapePairs);
-    }
-    modelsVector.push_back(testShapeList);
-
-    models = modelsVector;
-
-    setupFrame();
+    // for (int l = 0; l < 4; l++)
+    // {
+    //     vector<Pairs *> testShapePairs;
+    //     for (int k = 0; k < 4; k++)
+    //     {
+    //         for (int g = 0; g < 4; g++)
+    //         {
+    //             testShapePairs.push_back(new Pairs(k, g));
+    //         }
+    //     }
+    //     testShapeList.push_back(testShapePairs);
+    // }
+    // models.push_back(testShapeList);
 }
 
 void Tetromino::setupFrame()
@@ -575,7 +578,7 @@ bool Tetromino::touchedBoundary()
     return true;
 }
 
-void Tetromino::nextAction(int ticks, int resetAt)
+void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
 {
     if (touchedBoundary())
     {
@@ -587,7 +590,7 @@ void Tetromino::nextAction(int ticks, int resetAt)
     }
     if (ticks == resetAt)
     {
-        // shiftOffsetY(0.147);
+        shiftOffsetY(1);
     }
 }
 

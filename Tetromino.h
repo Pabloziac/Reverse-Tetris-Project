@@ -5,8 +5,10 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
+#include "Grid.h"
 #include "Rect.h"
 #include "Pairs.h"
+
 enum tMoShape
 {
     tShape,
@@ -16,7 +18,7 @@ enum tMoShape
     zShape,
     sqShape,
     iShape,
-    testShape
+    // testShape
 };
 enum Color
 {
@@ -48,8 +50,8 @@ public:
     float xoffset;
     float yoffset;
 
-    int gi; 
-    int gj; 
+    int gi;
+    int gj;
 
     Tetromino();
     void draw();
@@ -57,12 +59,13 @@ public:
     void rotate();
     bool validPos();
     void setupFrame();
-    void nextAction(int, int);
+    void nextAction(Grid *grid, int, int);
     bool touchedBoundary();
     void nextVersion();
     void shiftOffset();
     void shiftOffsetX(float val);
     void shiftOffsetY(float val);
+    void generateModels();
     ~Tetromino();
 };
 
