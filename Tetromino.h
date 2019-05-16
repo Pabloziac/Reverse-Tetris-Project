@@ -18,7 +18,7 @@ enum tMoShape
     zShape,
     sqShape,
     iShape,
-    // testShape
+    testShape
 };
 enum Color
 {
@@ -60,11 +60,14 @@ public:
     bool validPos();
     void setupFrame();
     void nextAction(Grid *grid, int, int);
-    bool touchedBoundary();
+    bool touchedBoundary(Grid *grid);
     void nextVersion();
     void shiftOffset();
-    void shiftOffsetX(float val);
-    void shiftOffsetY(float val);
+    void shiftOffsetX(Grid *grid, int val);
+    void shiftOffsetY(Grid *grid, int val);
+    bool canShiftX(Grid *grid, int);
+    bool canShiftY(Grid *grid, int);
+
     void generateModels();
     ~Tetromino();
 };
