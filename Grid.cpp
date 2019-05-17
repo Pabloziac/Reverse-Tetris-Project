@@ -8,7 +8,7 @@ Grid::Grid()
 
     // deleting behavior
     deletingState = notDeleting;
-    deletingRowIndex = 0;
+    deletingRowIndex = -3;
 
     yElements = 20;
     xElements = 13;
@@ -28,14 +28,14 @@ void Grid::resetGrid()
         {
             float x = -1.5 + rectWidth * j + 0.006 * j;
             float y = 1.0 - rectHeight * i - 0.006 * i;
-            if (i < 1)
-            {
-                aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
-            }
-            else
-            {
-                aRow.push_back(NULL);
-            }
+            // if (i < 1)
+            // {
+            //     aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
+            // }
+            // else
+            // {
+            aRow.push_back(NULL);
+            // }
         }
         gridData.push_back(aRow);
     }
@@ -80,6 +80,7 @@ void Grid::draw()
             for (int j = 0; j < gridData.at(i).size(); j++)
             {
                 Rect *curr = gridData.at(i).at(j);
+                // std::cout << "rec to draw" << curr << std::endl;
                 if (curr != NULL)
                 {
 
@@ -142,10 +143,18 @@ void Grid::continueMovingRects()
     }
 }
 
-// bool Grid::tetrominoDidHitBoundary(Tetromino *to){
-//     // to->()
-//     return true;
-// }
+void Grid::setAt(int i, int j, float x, float y, float w, float h, float r, float g, float b)
+{
+    std::cout << "i " << i << std::endl;
+    std::cout << "j " << j << std::endl;
+
+    std::cout << "rows " << gridData.size() << std::endl;
+    std::cout << "columns " << gridData.at(j).size() << std::endl;
+
+    Rect *copy = new Rect(x, y, w, h, r, g, b);
+    gridData.at(j).at(i) = copy;
+    std::cout << "rec in grid: " << gridData.at(j).at(i) << std::endl;
+}
 
 Grid::~Grid()
 {

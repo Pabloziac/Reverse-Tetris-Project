@@ -9,8 +9,8 @@ PROGRAM = glutapp
 
 #######################################################################
 
-# OPTFLAGS = -g  # for debug
-OPTFLAGS =
+OPTFLAGS = -g  # for debug
+# OPTFLAGS =
 CC       = g++
 CFLAGS   = -w $(OPTFLAGS) -ISOIL/includes -std=c++11 -pthread
 

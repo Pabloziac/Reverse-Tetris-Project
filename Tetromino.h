@@ -56,6 +56,7 @@ public:
     int gj;
 
     Tetromino();
+    void setShapeAndRotation(); 
     void draw();
     void clear();
     void rotate();
@@ -71,6 +72,8 @@ public:
     bool canShiftY(Grid *grid, int);
     int outsideRects();
     void generateModels();
+    void insertIntoGrid(Grid *grid);
+    void reset();
     ~Tetromino();
 };
 

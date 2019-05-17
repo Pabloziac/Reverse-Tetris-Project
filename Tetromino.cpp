@@ -11,11 +11,7 @@ using namespace std;
 
 Tetromino::Tetromino()
 {
-
-    // generate random state;
-    srand(time(NULL));
-    int s = rand() % 7;
-    int v = rand() % 4;
+    setShapeAndRotation();
 
     int yElements = 4;
     int xElements = 4;
@@ -29,11 +25,7 @@ Tetromino::Tetromino()
     yMax = 0;
 
     gi = 5;
-    gj = 9;
-
-    shape = (tMoShape)s;
-    // shape = lShape;
-    version = (tMoVersion)v;
+    gj = 13;
 
     // create frame
     vector<vector<Rect *>> tMo;
@@ -50,11 +42,29 @@ Tetromino::Tetromino()
 
     vector<vector<vector<Pairs *>>> models;
     models = models;
+
     generateModels();
 
     setupFrame();
 }
+void Tetromino::reset()
+{
+    clear();
+    cout << "finished clearing" << endl;
+    setShapeAndRotation();
+    cout << "setting rotation" << endl;
 
+    xMin = 0;
+    xMax = 0;
+    yMin = 0;
+    yMax = 0;
+
+    gi = 5;
+    gj = 13;
+
+    setupFrame();
+    cout << "finished setting up frame" << endl;
+}
 void Tetromino::generateModels()
 {
 
@@ -456,6 +466,16 @@ void Tetromino::generateModels()
     models.push_back(testShapeList);
 }
 
+void Tetromino::setShapeAndRotation()
+{
+    // generate random state;
+    srand(time(NULL));
+    int s = rand() % 7;
+    int v = rand() % 4;
+
+    shape = (tMoShape)s;
+    version = (tMoVersion)v;
+}
 void Tetromino::setupFrame()
 {
     cout << "settingFrame" << endl;
@@ -665,12 +685,14 @@ void Tetromino::clear()
 
 bool Tetromino::canContinueGoingUp(Grid *grid)
 {
+    cout << "canContinueGoingUp" << endl;
     // cout << "gi: " << (gi - 1) << endl;
     // cout << "gj: " << (gj - 1) << endl;
     int foundFirstRow = -1;
     // bool canMove = true;
     for (int i = 0; i < tMosData.size(); i++)
     {
+        cout << "foundFirst ROw: " << foundFirstRow << endl;
         if (foundFirstRow > -1)
         {
             break;
@@ -683,19 +705,20 @@ bool Tetromino::canContinueGoingUp(Grid *grid)
                 foundFirstRow = i;
 
                 int currentX = gi - 1 + j;
-                int currentY = gj - 2;
-                cout << "graph x " << currentX << endl;
+                int currentY = gj + foundFirstRow - 1;
+                // cout << "graph x " << currentX << endl;
 
-                cout << "next Y" << currentY - 1 << endl
-                     << endl;
+                // cout << "next Y" << currentY - 1 << endl
+                //  << endl;
                 // cout << "checking fam" << endl;
-                if (currentY - 1 < 0)
+                int nextY = currentY - 1;
+                if (nextY < 0)
                 {
                     return false;
                 }
                 else
                 {
-                    if (grid->getAt(currentX, currentY - 1) != NULL)
+                    if (grid->getAt(currentX, nextY) != NULL)
                     {
                         cout << "can move" << endl;
                         return false;
@@ -714,13 +737,47 @@ void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
         if (canContinueGoingUp(grid))
         {
             // move up
+            cout << "moving up" << endl;
             shiftOffsetY(grid, 1);
         }
         else
         {
             // reset position
             cout << "touched" << endl;
-            // grid->touched();
+            insertIntoGrid(grid);
+            cout << "finished inserting for grid" << endl;
+
+            // insert data into blocks
+            // grid->check();
+            reset();
+        }
+    }
+}
+
+void Tetromino::insertIntoGrid(Grid *grid)
+{
+    for (int i = 0; i < tMosData.size(); i++)
+    {
+        for (int j = 0; j < tMosData.at(i).size(); j++)
+        {
+            Rect *curr = tMosData.at(i).at(j);
+            if (curr != NULL)
+            {
+                int currentX = gi - 1 + j;
+                int currentY = gj - 1 + i;
+
+                // cout << "currentX: " << currentX << endl;
+                // cout <<deletingRowIndex "currentY: " << currentY << endl;
+
+                cout << "current address: " << curr << endl;
+
+                if (grid->getAt(currentX, currentY) == NULL)
+                {
+                    cout << "(" << currentX << "," << currentY << ")"
+                         << " is NULL" << endl;
+                    grid->setAt(currentX, currentY, curr->getX(), curr->getY(), curr->getW(), curr->getH(), curr->getR(), curr->getG(), curr->getB());
+                }
+            }
         }
     }
 }
