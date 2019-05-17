@@ -22,14 +22,17 @@ Tetromino::Tetromino()
 
     width = 0.14;
     height = 0.14;
-    xoffset = 0;
-    yoffset = 0;
+
+    xMin = 0;
+    xMax = 0;
+    yMin = 0;
+    yMax = 0;
 
     gi = 5;
     gj = 9;
 
-    // shape = (tMoShape)s;
-    shape = testShape;
+    shape = (tMoShape)s;
+    // shape = lShape;
     version = (tMoVersion)v;
 
     // create frame
@@ -494,6 +497,43 @@ void Tetromino::setupFrame()
             tMosData[gy][gx] = new Rect(x, y, width, height, 0.5, 0, 0.5);
         }
     }
+
+    xMax = -1000;
+    xMin = 1000;
+    yMax = -1000;
+    yMin = 1000;
+
+    for (int i = 0; i < tMosData.size(); i++)
+    {
+        for (int k = 0; k < tMosData.at(i).size(); k++)
+        {
+            if (tMosData.at(i).at(k) != NULL)
+            {
+                if (k < xMin)
+                {
+                    xMin = k;
+                }
+                else if (k > xMax)
+                {
+                    xMax = k;
+                }
+
+                if (i < yMin)
+                {
+                    yMin = i;
+                }
+                else if (i > yMax)
+                {
+                    yMax = i;
+                }
+            }
+        }
+    }
+    cout << "xMax : " << xMax << endl;
+    cout << "xMin : " << xMin << endl;
+
+    cout << "yMax : " << yMax << endl;
+    cout << "yMin : " << yMin << endl;
 }
 
 void Tetromino::draw()
@@ -512,8 +552,9 @@ void Tetromino::draw()
 }
 bool Tetromino::canShiftX(Grid *grid, int val)
 {
-    int nextX = gi - 1 + val;
-    return nextX >= 0 && nextX + 3 < 13;
+    int nextLeftBoundary = gi - 1 + xMin + val;
+    int nextRightBoundary = gi - 1 + xMax + val;
+    return nextLeftBoundary >= 0 && nextRightBoundary < 13;
 }
 
 bool Tetromino::canShiftY(Grid *grid, int val)
@@ -581,7 +622,31 @@ void Tetromino::nextVersion()
         version = v1;
     }
     setupFrame();
-    glutPostRedisplay();
+    int outies = outsideRects();
+    cout << "outies" << outies << endl;
+    if (outies == 0)
+    {
+        glutPostRedisplay();
+    }
+    else
+    {
+        shiftOffsetX(NULL, outies);
+    }
+}
+int Tetromino::outsideRects()
+{
+    int rightBound = gi - 1 + xMax;
+    int leftBound = gi - 1 + xMin;
+
+    if (rightBound >= 13)
+    {
+        return ((13 - 1) - rightBound);
+    }
+    else if (leftBound < 0)
+    {
+        return -1 * leftBound;
+    }
+    return 0;
 }
 void Tetromino::clear()
 {

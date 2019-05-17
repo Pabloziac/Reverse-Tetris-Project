@@ -47,8 +47,10 @@ public:
     float width;
     float height;
 
-    float xoffset;
-    float yoffset;
+    int xMin;
+    int xMax;
+    int yMin;
+    int yMax;
 
     int gi;
     int gj;
@@ -67,7 +69,7 @@ public:
     void shiftOffsetY(Grid *grid, int val);
     bool canShiftX(Grid *grid, int);
     bool canShiftY(Grid *grid, int);
-
+    int outsideRects();
     void generateModels();
     ~Tetromino();
 };
