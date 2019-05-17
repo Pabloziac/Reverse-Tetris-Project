@@ -529,11 +529,11 @@ void Tetromino::setupFrame()
             }
         }
     }
-    cout << "xMax : " << xMax << endl;
-    cout << "xMin : " << xMin << endl;
+    // cout << "xMax : " << xMax << endl;
+    // cout << "xMin : " << xMin << endl;
 
-    cout << "yMax : " << yMax << endl;
-    cout << "yMin : " << yMin << endl;
+    // cout << "yMax : " << yMax << endl;
+    // cout << "yMin : " << yMin << endl;
 }
 
 void Tetromino::draw()
@@ -564,7 +564,7 @@ bool Tetromino::canShiftY(Grid *grid, int val)
 
 void Tetromino::shiftOffset()
 {
-    cout << "shiftOffset" << endl;
+    // cout << "shiftOffset" << endl;
     for (int i = 0; i < models.at(shape).at(version).size(); i++)
     {
         int gx = models.at(shape).at(version).at(i)->getX();
@@ -580,9 +580,12 @@ void Tetromino::shiftOffset()
 
 void Tetromino::shiftOffsetY(Grid *grid, int val)
 {
-    gj -= val;
-    shiftOffset();
-    glutPostRedisplay();
+    if (canContinueGoingUp(grid))
+    {
+        gj -= val;
+        shiftOffset();
+        glutPostRedisplay();
+    }
 }
 
 void Tetromino::shiftOffsetX(Grid *grid, int val)
@@ -660,25 +663,65 @@ void Tetromino::clear()
     }
 }
 
-bool Tetromino::touchedBoundary(Grid *grid)
+bool Tetromino::canContinueGoingUp(Grid *grid)
 {
+    // cout << "gi: " << (gi - 1) << endl;
+    // cout << "gj: " << (gj - 1) << endl;
+    int foundFirstRow = -1;
+    // bool canMove = true;
+    for (int i = 0; i < tMosData.size(); i++)
+    {
+        if (foundFirstRow > -1)
+        {
+            break;
+        }
 
+        for (int j = 0; j < tMosData.at(i).size(); j++)
+        {
+            if (tMosData.at(i).at(j) != NULL)
+            {
+                foundFirstRow = i;
+
+                int currentX = gi - 1 + j;
+                int currentY = gj - 2;
+                cout << "graph x " << currentX << endl;
+
+                cout << "next Y" << currentY - 1 << endl
+                     << endl;
+                // cout << "checking fam" << endl;
+                if (currentY - 1 < 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (grid->getAt(currentX, currentY - 1) != NULL)
+                    {
+                        cout << "can move" << endl;
+                        return false;
+                    }
+                }
+            }
+        }
+    }
     return true;
 }
 
 void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
 {
-    if (touchedBoundary(grid))
-    {
-        // reset position
-    }
-    else
-    {
-        // move up
-    }
     if (ticks == resetAt)
     {
-        shiftOffsetY(grid, 1);
+        if (canContinueGoingUp(grid))
+        {
+            // move up
+            shiftOffsetY(grid, 1);
+        }
+        else
+        {
+            // reset position
+            cout << "touched" << endl;
+            // grid->touched();
+        }
     }
 }
 

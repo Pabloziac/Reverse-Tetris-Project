@@ -62,7 +62,7 @@ public:
     bool validPos();
     void setupFrame();
     void nextAction(Grid *grid, int, int);
-    bool touchedBoundary(Grid *grid);
+    bool canContinueGoingUp(Grid *grid);
     void nextVersion();
     void shiftOffset();
     void shiftOffsetX(Grid *grid, int val);

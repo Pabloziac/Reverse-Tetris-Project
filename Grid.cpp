@@ -10,7 +10,7 @@ Grid::Grid()
     deletingState = notDeleting;
     deletingRowIndex = 0;
 
-    yElements = 1;
+    yElements = 20;
     xElements = 13;
     rectWidth = 0.14;
     rectHeight = 0.14;
@@ -26,11 +26,16 @@ void Grid::resetGrid()
         std::vector<Rect *> aRow;
         for (int j = 0; j < xElements; j++)
         {
-            float x;
-            float y;
-            x = -1.5 + rectWidth * j + 0.006 * j;
-            y = 1.0 - rectHeight * i - 0.006 * i;
-            aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
+            float x = -1.5 + rectWidth * j + 0.006 * j;
+            float y = 1.0 - rectHeight * i - 0.006 * i;
+            if (i < 1)
+            {
+                aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
+            }
+            else
+            {
+                aRow.push_back(NULL);
+            }
         }
         gridData.push_back(aRow);
     }
@@ -75,7 +80,11 @@ void Grid::draw()
             for (int j = 0; j < gridData.at(i).size(); j++)
             {
                 Rect *curr = gridData.at(i).at(j);
-                curr->draw();
+                if (curr != NULL)
+                {
+
+                    curr->draw();
+                }
             }
         }
     }

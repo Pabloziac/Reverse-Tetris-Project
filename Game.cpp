@@ -28,7 +28,7 @@ Game::Game()
 
     tmos = new Tetromino();
     grid = new Grid();
-    grid->deleteRow(4);
+    // grid->deleteRow(4);
     char *text = "S C O R E : 0";
     scoreBoard = new TextBox(text, 0.6, 0.8, GLUT_BITMAP_HELVETICA_18, 0.6, 0.0, 0.9, 800);
     setRate(1);
