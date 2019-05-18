@@ -822,12 +822,8 @@ void Tetromino::insertIntoGrid(Grid *grid)
             Rect *curr = tMosData.at(i).at(j);
             if (curr != NULL)
             {
-                a++;
                 int currentX = tMosData.at(i).at(j)->getGridX();
                 int currentY = tMosData.at(i).at(j)->getGridY();
-                // cout << "currentX: " << currentX << endl;
-                // cout <<deletingRowIndex "currentY: " << currentY << endl;
-
                 cout << "current address: " << curr << endl;
 
                 if (grid->getAt(currentY, currentX) == NULL)
