@@ -88,7 +88,7 @@ void Game::handleKeyDown(unsigned char key, float x, float y)
 
     if (key == ' ') //rotating by switching the enum version.
     {
-        tmos->nextVersion();
+        tmos->nextVersion(grid);
     }
     else if (key == 'a')
     {

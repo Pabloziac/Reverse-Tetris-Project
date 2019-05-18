@@ -559,11 +559,6 @@ void Tetromino::setupFrame()
             }
         }
     }
-    // cout << "xMax : " << xMax << endl;
-    // cout << "xMin : " << xMin << endl;
-
-    // cout << "yMax : " << yMax << endl;
-    // cout << "yMin : " << yMin << endl;
 }
 
 void Tetromino::draw()
@@ -587,7 +582,7 @@ bool Tetromino::canShiftX(Grid *grid, int val)
     return nextLeftBoundary >= 0 && nextRightBoundary < 13;
 }
 
-bool Tetromino::canShiftY(Grid *grid, int val)
+bool Tetromino::canShift(Grid *grid, int iVal, int jVal)
 {
     // go through all positions in tmosData then
     // check if all next are null then return true
@@ -606,16 +601,24 @@ bool Tetromino::canShiftY(Grid *grid, int val)
                      << "    "
                      << "(" << grY << ", " << grX << ")" << endl;
 
-                int nextY = grY - val;
+                int nextY = grY - iVal;
+                int nextX = grX + jVal;
+
+                cout << "nextY " << nextY << endl;
+                cout << "nextX " << nextX << endl;
 
                 if (nextY <= -1)
                 {
-                    cout << "nextY " << nextY << endl;
+                    // cout << "nextY " << nextY << endl;
+                    return false;
+                }
+                else if (nextX < 0 || nextX > 12)
+                {
                     return false;
                 }
                 else
                 {
-                    if (grid->getAt(nextY, grX) != NULL)
+                    if (grid->getAt(nextY, nextX) != NULL)
                     {
                         return false;
                     }
@@ -655,7 +658,7 @@ void Tetromino::shiftOffset(int iVal, int jVal)
 
 void Tetromino::shiftOffsetY(Grid *grid, int val)
 {
-    if (canShiftY(grid, val))
+    if (canShift(grid, val, 0))
     {
         cout << "shifting " << val << endl;
         gi -= val;
@@ -666,7 +669,7 @@ void Tetromino::shiftOffsetY(Grid *grid, int val)
 
 void Tetromino::shiftOffsetX(Grid *grid, int val)
 {
-    if (canShiftX(grid, val))
+    if (canShift(grid, 0, val))
     {
         gj += val;
         shiftOffset(0, val);
@@ -678,7 +681,7 @@ void Tetromino::shiftOffsetX(Grid *grid, int val)
     }
 }
 
-void Tetromino::nextVersion()
+void Tetromino::nextVersion(Grid *grid)
 {
     clear();
     cout << " tmo version " << version << endl;
@@ -710,13 +713,13 @@ void Tetromino::nextVersion()
     }
     else
     {
-        shiftOffsetX(NULL, outies);
+        shiftOffsetX(grid, outies);
     }
 }
 int Tetromino::outsideRects()
 {
-    int rightBound = gj - 1 + xMax;
-    int leftBound = gj - 1 + xMin;
+    int rightBound = gj + xMax;
+    int leftBound = gj + xMin;
 
     if (rightBound >= 13)
     {
@@ -791,7 +794,7 @@ void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
 {
     if (ticks == resetAt)
     {
-        if (canShiftY(grid, 1))
+        if (canShift(grid, 1, 0))
         {
             // move up
             // cout << "moving up" << endl;

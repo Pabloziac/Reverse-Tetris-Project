@@ -145,14 +145,10 @@ void Grid::continueMovingRects()
 
 void Grid::setAt(int i, int j, float x, float y, float w, float h, float r, float g, float b)
 {
-    std::cout << "setting grid rec: (" << i << ", " << j << ")" << std::endl;
-
-    // std::cout << "rows " << gridData.size() << std::endl;
-    // std::cout << "columns " << gridData.at(j).size() << std::endl;
-
+    // std::cout << "setting grid rec: (" << i << ", " << j << ")" << std::endl;
     Rect *copy = new Rect(x, y, w, h, r, g, b);
     gridData.at(i).at(j) = copy;
-    std::cout << "rec in grid: " << gridData.at(j).at(i) << std::endl;
+    // std::cout << "rec in grid: " << gridData.at(j).at(i) << std::endl;
 }
 
 Grid::~Grid()
