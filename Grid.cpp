@@ -28,14 +28,14 @@ void Grid::resetGrid()
         {
             float x = -1.5 + rectWidth * j + 0.006 * j;
             float y = 1.0 - rectHeight * i - 0.006 * i;
-            // if (i < 1)
-            // {
-            //     aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
-            // }
-            // else
-            // {
+            if (i < 1)
+            {
+                aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
+            }
+            else
+            {
             aRow.push_back(NULL);
-            // }
+            }
         }
         gridData.push_back(aRow);
     }
@@ -83,7 +83,6 @@ void Grid::draw()
                 // std::cout << "rec to draw" << curr << std::endl;
                 if (curr != NULL)
                 {
-
                     curr->draw();
                 }
             }

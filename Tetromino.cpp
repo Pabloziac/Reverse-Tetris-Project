@@ -24,8 +24,8 @@ Tetromino::Tetromino()
     yMin = 0;
     yMax = 0;
 
-    gj = 5;
-    gi = 13;
+    gj = 4;
+    gi = 12;
 
     // create frame
     vector<vector<Rect *>> tMo;
@@ -59,8 +59,8 @@ void Tetromino::reset()
     yMin = 0;
     yMax = 0;
 
-    gj = 5;
-    gi = 13;
+    gj = 4;
+    gi = 12;
 
     setupFrame();
     cout << "finished setting up frame" << endl;
@@ -480,16 +480,22 @@ void Tetromino::setShapeAndRotation()
 void Tetromino::setupFrame()
 {
     cout << "settingFrame" << endl;
+    cout << "initial coors" << endl;
+
     for (int i = 0; i < models.at(shape).at(version).size(); i++)
     {
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
 
-        float x = -1.5 + (gx + gj - 1) * (width + 0.006);
-        float y = 1.0 - (gy + gi - 1) * (height + 0.006);
+        float x = -1.5 + (gx + gj) * (width + 0.006);
+        float y = 1.0 - (gy + gi) * (height + 0.006);
 
         int gridX = gx + gj;
         int gridY = gy + gi;
+
+        cout << "(" << gy << ", " << gx << ")"
+             << "    "
+             << "(" << gridY << ", " << gridX << ")" << endl;
 
         tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1, gridX, gridY);
         if (shape == 0)
@@ -576,8 +582,8 @@ void Tetromino::draw()
 }
 bool Tetromino::canShiftX(Grid *grid, int val)
 {
-    int nextLeftBoundary = gj - 1 + xMin + val;
-    int nextRightBoundary = gj - 1 + xMax + val;
+    int nextLeftBoundary = gj + xMin + val;
+    int nextRightBoundary = gj + xMax + val;
     return nextLeftBoundary >= 0 && nextRightBoundary < 13;
 }
 
@@ -604,6 +610,7 @@ bool Tetromino::canShiftY(Grid *grid, int val)
 
                 if (nextY <= -1)
                 {
+                    cout << "nextY " << nextY << endl;
                     return false;
                 }
                 else
@@ -627,14 +634,19 @@ void Tetromino::shiftOffset(int iVal, int jVal)
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
 
-        float x = -1.5 + (gx + gj - 1) * (width + 0.006);
-        float y = 1.0 - (gy + gi - 1) * (height + 0.006);
+        float x = -1.5 + (gx + gj) * (width + 0.006);
+        float y = 1.0 - (gy + gi) * (height + 0.006);
 
         tMosData[gy][gx]->setX(x);
         tMosData[gy][gx]->setY(y);
 
-        int gridX = gx + gj - jVal;
-        int gridY = gy + gi - iVal;
+        int gridX = tMosData[gy][gx]->getGridX() + jVal;
+        int gridY = tMosData[gy][gx]->getGridY() - iVal;
+
+        cout << "setting: "
+             //  << "(" << i << ", " << j << ")"
+             //  << "    "
+             << "(" << gridY << ", " << gridX << ")" << endl;
 
         tMosData[gy][gx]->setGridX(gridX);
         tMosData[gy][gx]->setGridY(gridY);
@@ -662,7 +674,6 @@ void Tetromino::shiftOffsetX(Grid *grid, int val)
     }
     else
     {
-
         cout << "x should not move" << endl;
     }
 }
@@ -783,7 +794,7 @@ void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
         if (canShiftY(grid, 1))
         {
             // move up
-            cout << "moving up" << endl;
+            // cout << "moving up" << endl;
             shiftOffsetY(grid, 1);
         }
         else
@@ -809,8 +820,8 @@ void Tetromino::insertIntoGrid(Grid *grid)
             Rect *curr = tMosData.at(i).at(j);
             if (curr != NULL)
             {
-                int currentX = gi - 1 + j;
-                int currentY = gj - 1 + i;
+                int currentX = tMosData.at(i).at(j)->getGridX(); 
+                int currentY = tMosData.at(i).at(j)->getGridY(); 
 
                 // cout << "currentX: " << currentX << endl;
                 // cout <<deletingRowIndex "currentY: " << currentY << endl;
