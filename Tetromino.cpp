@@ -834,7 +834,7 @@ void Tetromino::insertIntoGrid(Grid *grid)
                 {
                     cout << "(" << currentX << "," << currentY << ")"
                          << " is NULL" << endl;
-                    grid->setAt(currentX, currentY, curr->getX(), curr->getY(), curr->getW(), curr->getH(), curr->getR(), curr->getG(), curr->getB());
+                    grid->setAt(currentY, currentX, curr->getX(), curr->getY(), curr->getW(), curr->getH(), curr->getR(), curr->getG(), curr->getB());
                 }
             }
         }

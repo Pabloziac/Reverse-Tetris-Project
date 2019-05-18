@@ -151,7 +151,7 @@ void Grid::setAt(int i, int j, float x, float y, float w, float h, float r, floa
     // std::cout << "columns " << gridData.at(j).size() << std::endl;
 
     Rect *copy = new Rect(x, y, w, h, r, g, b);
-    gridData.at(j).at(i) = copy;
+    gridData.at(i).at(j) = copy;
     std::cout << "rec in grid: " << gridData.at(j).at(i) << std::endl;
 }
 
