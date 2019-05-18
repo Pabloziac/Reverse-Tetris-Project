@@ -16,11 +16,11 @@ protected:
     float b;
 
     // position on grid
-    int i;
-    int j;     
+    int gridX;
+    int gridY;
 
 public:
-    Rect(float = 0.0f, float = 0.0f, float = 0.4f, float = 0.2f, float = 1.0f, float = 1.0f, float = 1.0f);
+    Rect(float = 0.0f, float = 0.0f, float = 0.4f, float = 0.2f, float = 1.0f, float = 1.0f, float = 1.0f, int = 0, int = 0);
 
     float getX() const;
     float getY() const;
@@ -31,8 +31,8 @@ public:
     float getG() const;
     float getB() const;
 
-    int getI(); 
-    int getJ(); 
+    int getGridX() const;
+    int getGridY() const;
 
     void setX(float);
     void setY(float);
@@ -43,8 +43,8 @@ public:
     void setG(float);
     void setB(float);
 
-    void setI(); 
-    void setJ();     
+    void setGridX(int);
+    void setGridY(int);
 
     bool contains(float, float) const;
 

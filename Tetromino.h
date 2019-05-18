@@ -56,7 +56,7 @@ public:
     int gj;
 
     Tetromino();
-    void setShapeAndRotation(); 
+    void setShapeAndRotation();
     void draw();
     void clear();
     void rotate();
@@ -65,7 +65,7 @@ public:
     void nextAction(Grid *grid, int, int);
     bool canContinueGoingUp(Grid *grid);
     void nextVersion();
-    void shiftOffset();
+    void shiftOffset(int, int);
     void shiftOffsetX(Grid *grid, int val);
     void shiftOffsetY(Grid *grid, int val);
     bool canShiftX(Grid *grid, int);

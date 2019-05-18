@@ -1,6 +1,6 @@
 #include "Rect.h"
 
-Rect::Rect(float x, float y, float w, float h, float r, float g, float b) : x(x), y(y), w(w), h(h), r(r), g(g), b(b)
+Rect::Rect(float x, float y, float w, float h, float r, float g, float b, int gridX, int gridY) : x(x), y(y), w(w), h(h), r(r), g(g), b(b), gridX(gridX), gridY(gridY)
 {
 }
 
@@ -39,6 +39,16 @@ float Rect::getB() const
     return b;
 }
 
+int Rect::getGridX() const
+{
+    return gridX;
+}
+
+int Rect::getGridY() const
+{
+    return gridY;
+}
+
 void Rect::setX(float x)
 {
     this->x = x;
@@ -72,6 +82,14 @@ void Rect::setG(float g)
 void Rect::setB(float b)
 {
     this->b = b;
+}
+void Rect::setGridX(int x)
+{
+    this->gridX = x;
+}
+void Rect::setGridY(int y)
+{
+    this->gridY = y;
 }
 
 bool Rect::contains(float px, float py) const

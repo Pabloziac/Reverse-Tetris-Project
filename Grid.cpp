@@ -90,9 +90,9 @@ void Grid::draw()
         }
     }
 }
-Rect *Grid::getAt(int x, int y)
+Rect *Grid::getAt(int y, int x)
 {
-    return gridData.at(x).at(y);
+    return gridData.at(y).at(x);
 }
 
 // deleting behavior

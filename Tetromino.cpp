@@ -24,8 +24,8 @@ Tetromino::Tetromino()
     yMin = 0;
     yMax = 0;
 
-    gi = 5;
-    gj = 13;
+    gj = 5;
+    gi = 13;
 
     // create frame
     vector<vector<Rect *>> tMo;
@@ -59,8 +59,8 @@ void Tetromino::reset()
     yMin = 0;
     yMax = 0;
 
-    gi = 5;
-    gj = 13;
+    gj = 5;
+    gi = 13;
 
     setupFrame();
     cout << "finished setting up frame" << endl;
@@ -473,7 +473,8 @@ void Tetromino::setShapeAndRotation()
     int s = rand() % 7;
     int v = rand() % 4;
 
-    shape = (tMoShape)s;
+    // shape = (tMoShape)s;
+    shape = iShape;
     version = (tMoVersion)v;
 }
 void Tetromino::setupFrame()
@@ -484,37 +485,40 @@ void Tetromino::setupFrame()
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
 
-        float x = -1.5 + (gx + gi - 1) * (width + 0.006);
-        float y = 1.0 - (gy + gj - 1) * (height + 0.006);
+        float x = -1.5 + (gx + gj - 1) * (width + 0.006);
+        float y = 1.0 - (gy + gi - 1) * (height + 0.006);
 
-        tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1);
+        int gridX = gx + gj;
+        int gridY = gy + gi;
+
+        tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1, gridX, gridY);
         if (shape == 0)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, .8);
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, .8, gridX, gridY);
         }
         if (shape == 1)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0, .4, 1);
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0, .4, 1, gridX, gridY);
         }
         if (shape == 2)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0.7, 0, 0.2);
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0.7, 0, 0.2, gridX, gridY);
         }
         if (shape == 3)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0.75, 0, 0);
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0.75, 0, 0, gridX, gridY);
         }
         if (shape == 4)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 1, 0.5, 0);
+            tMosData[gy][gx] = new Rect(x, y, width, height, 1, 0.5, 0, gridX, gridY);
         }
         if (shape == 5)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, .3, .5, 1);
+            tMosData[gy][gx] = new Rect(x, y, width, height, .3, .5, 1, gridX, gridY);
         }
         if (shape == 6)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0.5, 0, 0.5);
+            tMosData[gy][gx] = new Rect(x, y, width, height, 0.5, 0, 0.5, gridX, gridY);
         }
     }
 
@@ -572,17 +576,50 @@ void Tetromino::draw()
 }
 bool Tetromino::canShiftX(Grid *grid, int val)
 {
-    int nextLeftBoundary = gi - 1 + xMin + val;
-    int nextRightBoundary = gi - 1 + xMax + val;
+    int nextLeftBoundary = gj - 1 + xMin + val;
+    int nextRightBoundary = gj - 1 + xMax + val;
     return nextLeftBoundary >= 0 && nextRightBoundary < 13;
 }
 
 bool Tetromino::canShiftY(Grid *grid, int val)
 {
-    return false;
+    // go through all positions in tmosData then
+    // check if all next are null then return true
+
+    for (int i = 0; i < tMosData.size(); i++)
+    {
+        for (int j = 0; j < tMosData.at(i).size(); j++)
+        {
+            Rect *curr = tMosData.at(i).at(j);
+            if (curr != NULL)
+            {
+                int grX = tMosData.at(i).at(j)->getGridX();
+                int grY = tMosData.at(i).at(j)->getGridY();
+
+                cout << "(" << i << ", " << j << ")"
+                     << "    "
+                     << "(" << grY << ", " << grX << ")" << endl;
+
+                int nextY = grY - val;
+
+                if (nextY <= -1)
+                {
+                    return false;
+                }
+                else
+                {
+                    if (grid->getAt(nextY, grX) != NULL)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    return true;
 }
 
-void Tetromino::shiftOffset()
+void Tetromino::shiftOffset(int iVal, int jVal)
 {
     // cout << "shiftOffset" << endl;
     for (int i = 0; i < models.at(shape).at(version).size(); i++)
@@ -590,20 +627,27 @@ void Tetromino::shiftOffset()
         int gx = models.at(shape).at(version).at(i)->getX();
         int gy = models.at(shape).at(version).at(i)->getY();
 
-        float x = -1.5 + (gx + gi - 1) * (width + 0.006);
-        float y = 1.0 - (gy + gj - 1) * (height + 0.006);
+        float x = -1.5 + (gx + gj - 1) * (width + 0.006);
+        float y = 1.0 - (gy + gi - 1) * (height + 0.006);
 
         tMosData[gy][gx]->setX(x);
         tMosData[gy][gx]->setY(y);
+
+        int gridX = gx + gj - jVal;
+        int gridY = gy + gi - iVal;
+
+        tMosData[gy][gx]->setGridX(gridX);
+        tMosData[gy][gx]->setGridY(gridY);
     }
 }
 
 void Tetromino::shiftOffsetY(Grid *grid, int val)
 {
-    if (canContinueGoingUp(grid))
+    if (canShiftY(grid, val))
     {
-        gj -= val;
-        shiftOffset();
+        cout << "shifting " << val << endl;
+        gi -= val;
+        shiftOffset(val, 0);
         glutPostRedisplay();
     }
 }
@@ -612,8 +656,8 @@ void Tetromino::shiftOffsetX(Grid *grid, int val)
 {
     if (canShiftX(grid, val))
     {
-        gi += val;
-        shiftOffset();
+        gj += val;
+        shiftOffset(0, val);
         glutPostRedisplay();
     }
     else
@@ -644,7 +688,9 @@ void Tetromino::nextVersion()
     {
         version = v1;
     }
+
     setupFrame();
+
     int outies = outsideRects();
     cout << "outies" << outies << endl;
     if (outies == 0)
@@ -658,8 +704,8 @@ void Tetromino::nextVersion()
 }
 int Tetromino::outsideRects()
 {
-    int rightBound = gi - 1 + xMax;
-    int leftBound = gi - 1 + xMin;
+    int rightBound = gj - 1 + xMax;
+    int leftBound = gj - 1 + xMin;
 
     if (rightBound >= 13)
     {
@@ -718,7 +764,7 @@ bool Tetromino::canContinueGoingUp(Grid *grid)
                 }
                 else
                 {
-                    if (grid->getAt(currentX, nextY) != NULL)
+                    if (grid->getAt(nextY, nextY) != NULL)
                     {
                         cout << "can move" << endl;
                         return false;
@@ -734,7 +780,7 @@ void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
 {
     if (ticks == resetAt)
     {
-        if (canContinueGoingUp(grid))
+        if (canShiftY(grid, 1))
         {
             // move up
             cout << "moving up" << endl;
