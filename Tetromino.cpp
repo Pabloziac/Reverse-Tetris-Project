@@ -803,7 +803,7 @@ void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
             cout << "touched" << endl;
             insertIntoGrid(grid);
             cout << "finished inserting for grid" << endl;
-
+            grid->Print();
             // insert data into blocks
             // grid->check();
             reset();
@@ -813,22 +813,24 @@ void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
 
 void Tetromino::insertIntoGrid(Grid *grid)
 {
+    int a = 0;
     for (int i = 0; i < tMosData.size(); i++)
     {
         for (int j = 0; j < tMosData.at(i).size(); j++)
         {
+
             Rect *curr = tMosData.at(i).at(j);
             if (curr != NULL)
             {
-                int currentX = tMosData.at(i).at(j)->getGridX(); 
-                int currentY = tMosData.at(i).at(j)->getGridY(); 
-
+                a++;
+                int currentX = tMosData.at(i).at(j)->getGridX();
+                int currentY = tMosData.at(i).at(j)->getGridY();
                 // cout << "currentX: " << currentX << endl;
                 // cout <<deletingRowIndex "currentY: " << currentY << endl;
 
                 cout << "current address: " << curr << endl;
 
-                if (grid->getAt(currentX, currentY) == NULL)
+                if (grid->getAt(currentY, currentX) == NULL)
                 {
                     cout << "(" << currentX << "," << currentY << ")"
                          << " is NULL" << endl;
@@ -837,6 +839,7 @@ void Tetromino::insertIntoGrid(Grid *grid)
             }
         }
     }
+    cout << "insertFuntion found " << a << "elements" << endl;
 }
 
 Tetromino::~Tetromino()

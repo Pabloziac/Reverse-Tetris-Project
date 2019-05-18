@@ -34,7 +34,7 @@ void Grid::resetGrid()
             }
             else
             {
-            aRow.push_back(NULL);
+                aRow.push_back(NULL);
             }
         }
         gridData.push_back(aRow);
@@ -75,18 +75,19 @@ void Grid::draw()
     for (int i = 0; i < gridData.size(); i++)
     {
         // rect
-        if (!(currentState == deletingARow && deletingRowIndex == i))
+        // if (currentState != deletingARow && deletingRowIndex != i)
+        // {
+        for (int j = 0; j < gridData.at(i).size(); j++)
         {
-            for (int j = 0; j < gridData.at(i).size(); j++)
+            Rect *curr = gridData.at(i).at(j);
+            // std::cout << "rec to draw" << curr << std::endl;
+            if (curr != NULL)
             {
-                Rect *curr = gridData.at(i).at(j);
-                // std::cout << "rec to draw" << curr << std::endl;
-                if (curr != NULL)
-                {
-                    curr->draw();
-                }
+                // std::cout << "" << i << " " << j << std::endl;
+                curr->draw();
             }
         }
+        // }
     }
 }
 Rect *Grid::getAt(int y, int x)
@@ -144,11 +145,10 @@ void Grid::continueMovingRects()
 
 void Grid::setAt(int i, int j, float x, float y, float w, float h, float r, float g, float b)
 {
-    std::cout << "i " << i << std::endl;
-    std::cout << "j " << j << std::endl;
+    std::cout << "setting grid rec: (" << i << ", " << j << ")" << std::endl;
 
-    std::cout << "rows " << gridData.size() << std::endl;
-    std::cout << "columns " << gridData.at(j).size() << std::endl;
+    // std::cout << "rows " << gridData.size() << std::endl;
+    // std::cout << "columns " << gridData.at(j).size() << std::endl;
 
     Rect *copy = new Rect(x, y, w, h, r, g, b);
     gridData.at(j).at(i) = copy;
