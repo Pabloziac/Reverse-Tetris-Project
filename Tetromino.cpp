@@ -472,9 +472,7 @@ void Tetromino::setShapeAndRotation()
     srand(time(NULL));
     int s = rand() % 7;
     int v = rand() % 4;
-
-    // shape = (tMoShape)s;
-    shape = iShape;
+    shape = (tMoShape)s;
     version = (tMoVersion)v;
 }
 void Tetromino::setupFrame()
@@ -493,9 +491,9 @@ void Tetromino::setupFrame()
         int gridX = gx + gj;
         int gridY = gy + gi;
 
-        cout << "(" << gy << ", " << gx << ")"
-             << "    "
-             << "(" << gridY << ", " << gridX << ")" << endl;
+        // cout << "(" << gy << ", " << gx << ")"
+        //      << "    "
+        //      << "(" << gridY << ", " << gridX << ")" << endl;
 
         tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1, gridX, gridY);
         if (shape == 0)
@@ -646,10 +644,10 @@ void Tetromino::shiftOffset(int iVal, int jVal)
         int gridX = tMosData[gy][gx]->getGridX() + jVal;
         int gridY = tMosData[gy][gx]->getGridY() - iVal;
 
-        cout << "setting: "
+        // cout << "setting: "
              //  << "(" << i << ", " << j << ")"
              //  << "    "
-             << "(" << gridY << ", " << gridX << ")" << endl;
+            //  << "(" << gridY << ", " << gridX << ")" << endl;
 
         tMosData[gy][gx]->setGridX(gridX);
         tMosData[gy][gx]->setGridY(gridY);
@@ -660,7 +658,7 @@ void Tetromino::shiftOffsetY(Grid *grid, int val)
 {
     if (canShift(grid, val, 0))
     {
-        cout << "shifting " << val << endl;
+        // cout << "shifting " << val << endl;
         gi -= val;
         shiftOffset(val, 0);
         glutPostRedisplay();
@@ -684,7 +682,7 @@ void Tetromino::shiftOffsetX(Grid *grid, int val)
 void Tetromino::nextVersion(Grid *grid)
 {
     clear();
-    cout << " tmo version " << version << endl;
+    // cout << " tmo version " << version << endl;
 
     if (version == v1)
     {
@@ -706,7 +704,7 @@ void Tetromino::nextVersion(Grid *grid)
     setupFrame();
 
     int outies = outsideRects();
-    cout << "outies" << outies << endl;
+    // cout << "outies" << outies << endl;
     if (outies == 0)
     {
         glutPostRedisplay();
@@ -746,8 +744,7 @@ void Tetromino::clear()
 bool Tetromino::canContinueGoingUp(Grid *grid)
 {
     cout << "canContinueGoingUp" << endl;
-    // cout << "gi: " << (gi - 1) << endl;
-    // cout << "gj: " << (gj - 1) << endl;
+
     int foundFirstRow = -1;
     // bool canMove = true;
     for (int i = 0; i < tMosData.size(); i++)
@@ -808,7 +805,7 @@ void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
             cout << "finished inserting for grid" << endl;
             grid->Print();
             // insert data into blocks
-            // grid->check();
+            grid->check();
             reset();
         }
     }
