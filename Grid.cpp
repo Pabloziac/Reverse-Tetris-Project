@@ -28,19 +28,24 @@ void Grid::resetGrid()
         {
             float x = -1.5 + rectWidth * j + 0.006 * j;
             float y = 1.0 - rectHeight * i - 0.006 * i;
-            if (i < 1)
-            {
-                aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
-            }
-            else
-            {
-                aRow.push_back(NULL);
-            }
+            // if (i < 1)
+            // {
+            //     aRow.push_back(new Rect(x, y, rectWidth, rectHeight, 0.4, 0.9, 0.4));
+            // }
+            // else
+            // {
+            aRow.push_back(NULL);
+            // }
         }
         gridData.push_back(aRow);
     }
 }
-
+void Grid::check()
+{
+    // check if any rows full
+        // if so then delete all rows
+    // check if game is over
+}
 void Grid::Print()
 {
     std::cout << "Grid \n";

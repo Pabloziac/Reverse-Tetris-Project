@@ -38,6 +38,7 @@ public:
     Rect *getAt(int x, int y);
     void deleteRow(int i);
     void resetGrid();
+    void check();
     void continueMovingRects();
     ~Grid();
 };
