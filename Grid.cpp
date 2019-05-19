@@ -43,8 +43,44 @@ void Grid::resetGrid()
 void Grid::check()
 {
     // check if any rows full
-        // if so then delete all rows
+    // if so then delete all rows
     // check if game is over
+    std::vector<int> toDelete;
+    int filledSpots = 0;
+    for (int i = 0; i < gridData.size(); i++)
+    {
+        for (int j = 0; j < gridData.at(i).size(); j++)
+        {
+            if (gridData.at(i).at(j) != NULL)
+            {
+                filledSpots++;
+            }
+        }
+        if (filledSpots == 13)
+        {
+            toDelete.push_back(i);
+        }
+        else if (filledSpots == 0)
+        {
+            break;
+        }
+    }
+
+    for (int j = 0; j < toDelete.size(); j++)
+    {
+        std::cout << "will delete " << toDelete.at(j) << std::endl;
+    }
+
+    deleteRows(toDelete);
+
+    for (int j = 0; j < gridData.at(13).size(); j++)
+    {
+        if (gridData.at(13).at(j) != NULL)
+        {
+            std::cout << "game over" << std::endl;
+            break;
+        }
+    }
 }
 void Grid::Print()
 {
@@ -101,7 +137,7 @@ Rect *Grid::getAt(int y, int x)
 }
 
 // deleting behavior
-void Grid::deleteRow(int i)
+void Grid::deleteRows(vector<int> toDelete)
 {
     deletingRowIndex = i;
     std::cout << "set to delete row: " << i << std::endl;
