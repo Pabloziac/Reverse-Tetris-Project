@@ -53,7 +53,9 @@ void Game::draw() const
 {
     tmos->draw();
     grid->draw();
-    scoreBoard->draw();
+    //char* text = " SCORE : ";
+    scoreBoard->drawBitmapText(1, 0.75, score);
+    //scoreBoard->draw(score);
 }
 void Game::handleSpecialKeyDown(int key, float a, float b)
 {
