@@ -20,7 +20,7 @@ protected:
     GLuint texture_id;
     
 public:
-    TexRect(const char*, float, float, float, float);
+    TexRect(const char*, float, float, float, float, int, int);
     
     void draw(float z) const;
 };

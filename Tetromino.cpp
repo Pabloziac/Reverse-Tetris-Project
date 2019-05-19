@@ -6,6 +6,7 @@
 #include "Tetromino.h"
 #include "Pairs.h"
 #include "Grid.h"
+#include "TexRect.h"
 
 using namespace std;
 
@@ -497,34 +498,34 @@ void Tetromino::setupFrame()
              << "    "
              << "(" << gridY << ", " << gridX << ")" << endl;
 
-        tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1, gridX, gridY);
+        tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
         if (shape == 0)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, .8, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 1)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0, .4, 1, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 2)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0.7, 0, 0.2, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 3)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0.75, 0, 0, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 4)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 1, 0.5, 0, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 5)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, .3, .5, 1, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 6)
         {
-            tMosData[gy][gx] = new Rect(x, y, width, height, 0.5, 0, 0.5, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
         }
     }
 
