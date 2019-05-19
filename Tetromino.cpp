@@ -498,34 +498,34 @@ void Tetromino::setupFrame()
              << "    "
              << "(" << gridY << ", " << gridX << ")" << endl;
 
-        tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
+        tMosData[gy][gx] = new TexRect("/home/peep/CSE165/OpenGLProject/Reverse-Tetris-Project/red.png", x, y, width, height, gridX, gridY);
         if (shape == 0)
         {
-            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("/home/peep/CSE165/OpenGLProject/Reverse-Tetris-Project/red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 1)
         {
-            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("/home/peep/CSE165/OpenGLProject/Reverse-Tetris-Project/red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 2)
         {
-            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("/home/peep/CSE165/OpenGLProject/Reverse-Tetris-Project/red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 3)
         {
-            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("/home/peep/CSE165/OpenGLProject/Reverse-Tetris-Project/red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 4)
         {
-            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("/home/peep/CSE165/OpenGLProject/Reverse-Tetris-Project/red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 5)
         {
-            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("/home/peep/CSE165/OpenGLProject/Reverse-Tetris-Project/red.png", x, y, width, height, gridX, gridY);
         }
         if (shape == 6)
         {
-            tMosData[gy][gx] = new TexRect("red.png", x, y, width, height, gridX, gridY);
+            tMosData[gy][gx] = new TexRect("/home/peep/CSE165/OpenGLProject/Reverse-Tetris-Project/red.png", x, y, width, height, gridX, gridY);
         }
     }
 
@@ -805,7 +805,7 @@ void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
         {
             // reset position
             cout << "touched" << endl;
-            insertIntoGrid(grid);
+            //insertIntoGrid(grid);
             cout << "finished inserting for grid" << endl;
             grid->Print();
             // insert data into blocks
