@@ -14,6 +14,7 @@ class TextBox: public Shape {
     float g;
     float b;
     int width;
+    
 public:
     TextBox(
             
@@ -27,7 +28,9 @@ public:
             int = 800
     );
     
+    void draw(int score);
     void draw() const;
+    void drawBitmapText(float x, float y, int score);
 };
 
 #endif /* TextBox_hpp */

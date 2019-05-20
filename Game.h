@@ -24,6 +24,7 @@ class Game : public AppComponent, private Timer
     bool hit;
     float theta;
     float deg;
+    int score = 21;
 
 public:
     AnimatedRect *explosion;
