@@ -33,4 +33,4 @@ public:
     void drawBitmapText(float x, float y, int score);
 };
 
-#endif /* TextBox_hpp */
+#endif

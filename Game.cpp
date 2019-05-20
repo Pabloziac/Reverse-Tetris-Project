@@ -43,7 +43,7 @@ void Game::action()
     if (rows == -1)
     {
         stop();
-        menu->showFinalScore(); 
+       // menu->showFinalScore(); 
     }
     else if (rows >= 0)
     {
