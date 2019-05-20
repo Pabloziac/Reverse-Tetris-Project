@@ -28,15 +28,17 @@ private:
     float rectWidth;
     float rectHeight;
 
-public:
     std::vector<std::vector<Rect *>> gridData;
+    std::vector<int> toDelete;
+
+public:
     Grid();
     void Print();
     void draw();
     std::vector<int> ContainsFullRows();
     void setAt(int i, int j, float x, float y, float w, float h, float r, float g, float b);
     Rect *getAt(int x, int y);
-    void deleteRow(int i);
+    void deleteRows(std::vector<int> toDeleteVector);
     void resetGrid();
     void check();
     void continueMovingRects();
