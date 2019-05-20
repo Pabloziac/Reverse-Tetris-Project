@@ -50,9 +50,7 @@ Tetromino::Tetromino()
 void Tetromino::reset()
 {
     clear();
-    //cout << "finished clearing" << endl;
     setShapeAndRotation();
-    //cout << "setting rotation" << endl;
 
     xMin = 0;
     xMax = 0;
@@ -63,7 +61,6 @@ void Tetromino::reset()
     gi = 12;
 
     setupFrame();
-    //cout << "finished setting up frame" << endl;
 }
 void Tetromino::generateModels()
 {
@@ -477,9 +474,6 @@ void Tetromino::setShapeAndRotation()
 }
 void Tetromino::setupFrame()
 {
-    //cout << "settingFrame" << endl;
-    //cout << "initial coors" << endl;
-
     for (int i = 0; i < models.at(shape).at(version).size(); i++)
     {
         int gx = models.at(shape).at(version).at(i)->getX();
@@ -490,10 +484,6 @@ void Tetromino::setupFrame()
 
         int gridX = gx + gj;
         int gridY = gy + gi;
-
-        // //cout << "(" << gy << ", " << gx << ")"
-        //      << "    "
-        //      << "(" << gridY << ", " << gridX << ")" << endl;
 
         tMosData[gy][gx] = new Rect(x, y, width, height, 0, 0, 1, gridX, gridY);
         if (shape == 0)
@@ -595,19 +585,11 @@ bool Tetromino::canShift(Grid *grid, int iVal, int jVal)
                 int grX = tMosData.at(i).at(j)->getGridX();
                 int grY = tMosData.at(i).at(j)->getGridY();
 
-                //cout << "(" << i << ", " << j << ")"
-                //  << "    "
-                //  << "(" << grY << ", " << grX << ")" << endl;
-
                 int nextY = grY - iVal;
                 int nextX = grX + jVal;
 
-                //cout << "nextY " << nextY << endl;
-                //cout << "nextX " << nextX << endl;
-
                 if (nextY <= -1)
                 {
-                    // //cout << "nextY " << nextY << endl;
                     return false;
                 }
                 else if (nextX < 0 || nextX > 12)
@@ -629,7 +611,6 @@ bool Tetromino::canShift(Grid *grid, int iVal, int jVal)
 
 void Tetromino::shiftOffset(int iVal, int jVal)
 {
-    // //cout << "shiftOffset" << endl;
     for (int i = 0; i < models.at(shape).at(version).size(); i++)
     {
         int gx = models.at(shape).at(version).at(i)->getX();
@@ -644,11 +625,6 @@ void Tetromino::shiftOffset(int iVal, int jVal)
         int gridX = tMosData[gy][gx]->getGridX() + jVal;
         int gridY = tMosData[gy][gx]->getGridY() - iVal;
 
-        // //cout << "setting: "
-        //  << "(" << i << ", " << j << ")"
-        //  << "    "
-        //  << "(" << gridY << ", " << gridX << ")" << endl;
-
         tMosData[gy][gx]->setGridX(gridX);
         tMosData[gy][gx]->setGridY(gridY);
     }
@@ -658,7 +634,6 @@ void Tetromino::shiftOffsetY(Grid *grid, int val)
 {
     if (canShift(grid, val, 0))
     {
-        // //cout << "shifting " << val << endl;
         gi -= val;
         shiftOffset(val, 0);
         glutPostRedisplay();
@@ -673,16 +648,11 @@ void Tetromino::shiftOffsetX(Grid *grid, int val)
         shiftOffset(0, val);
         glutPostRedisplay();
     }
-    else
-    {
-        //cout << "x should not move" << endl;
-    }
 }
 
 void Tetromino::nextVersion(Grid *grid)
 {
     clear();
-    // //cout << " tmo version " << version << endl;
 
     if (version == v1)
     {
@@ -704,7 +674,6 @@ void Tetromino::nextVersion(Grid *grid)
     setupFrame();
 
     int outies = outsideRects();
-    // //cout << "outies" << outies << endl;
     if (outies == 0)
     {
         glutPostRedisplay();
@@ -731,7 +700,6 @@ int Tetromino::outsideRects()
 }
 void Tetromino::clear()
 {
-    // //cout << "cleared" << endl;
     for (int i = 0; i < models.at(shape).at(version).size(); i++)
     {
         int gx = models.at(shape).at(version).at(i)->getX();
@@ -743,13 +711,9 @@ void Tetromino::clear()
 
 bool Tetromino::canContinueGoingUp(Grid *grid)
 {
-    //cout << "canContinueGoingUp" << endl;
-
     int foundFirstRow = -1;
-    // bool canMove = true;
     for (int i = 0; i < tMosData.size(); i++)
     {
-        //cout << "foundFirst ROw: " << foundFirstRow << endl;
         if (foundFirstRow > -1)
         {
             break;
@@ -763,11 +727,6 @@ bool Tetromino::canContinueGoingUp(Grid *grid)
 
                 int currentX = gi - 1 + j;
                 int currentY = gj + foundFirstRow - 1;
-                // //cout << "graph x " << currentX << endl;
-
-                // //cout << "next Y" << currentY - 1 << endl
-                //  << endl;
-                // //cout << "checking fam" << endl;
                 int nextY = currentY - 1;
                 if (nextY < 0)
                 {
@@ -777,7 +736,6 @@ bool Tetromino::canContinueGoingUp(Grid *grid)
                 {
                     if (grid->getAt(nextY, nextY) != NULL)
                     {
-                        //cout << "can move" << endl;
                         return false;
                     }
                 }
@@ -793,29 +751,12 @@ int Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
     {
         if (canShift(grid, 1, 0))
         {
-            // move up
-            // //cout << "moving up" << endl;
             shiftOffsetY(grid, 1);
         }
         else
         {
-            // reset position
-            //cout << "touched" << endl;
             insertIntoGrid(grid);
-            //cout << "finished inserting for grid" << endl;
-            // grid->Print1();
-            // insert data into blocks
             int rows = grid->check();
-            // if (rows >= 0)
-            // {
-            //     // }
-            //     // else(rows == -1){
-            // }
-            // else
-            // {
-
-            // }
-            //
             reset();
             return rows;
         }
@@ -840,14 +781,11 @@ void Tetromino::insertIntoGrid(Grid *grid)
 
                 if (grid->getAt(currentY, currentX) == NULL)
                 {
-                    //cout << "(" << currentX << "," << currentY << ")"
-                    //  << " is NULL" << endl;
                     grid->setAt(currentY, currentX, curr->getX(), curr->getY(), curr->getW(), curr->getH(), curr->getR(), curr->getG(), curr->getB());
                 }
             }
         }
     }
-    //cout << "insertFuntion found " << a << "elements" << endl;
 }
 
 Tetromino::~Tetromino()

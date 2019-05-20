@@ -42,6 +42,8 @@ void TextBox::draw()
     //
     //    const char *res = ss.str().c_str();
 
+void TextBox::draw(int score){
+    
     glColor3f(r, g, b);
     float offset = 0;
     for (int i = 0; i < text.length(); i++)
@@ -56,7 +58,6 @@ void TextBox::draw()
 void TextBox::drawBitmapText(float x, float y, int score)
 {
     int num = score;
-    //num = 41;
     stringstream ss;
     ss << "SCORE : " << num;
 

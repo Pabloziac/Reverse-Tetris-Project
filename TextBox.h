@@ -33,4 +33,4 @@ public:
     void newText(char *newText);
 };
 
-#endif /* TextBox_hpp */
+#endif
