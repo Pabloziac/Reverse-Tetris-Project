@@ -37,6 +37,7 @@ Game::Game()
 
 void Game::startGame()
 {
+    score = 0;
     tmos = new Tetromino();
     grid = new Grid();
     gameStarted = true;

@@ -17,10 +17,9 @@ Menu::Menu()
     resetButtonActive = false;
     gameIsOver = false;
     score = 0;
-
-    msg = new TextBox("Sirtet", 0.5, 1, GLUT_BITMAP_HELVETICA_18, 0.6, 0.0, 0.9, 800);
-
-    scoreBoard = new TextBox("text", 0, 1, GLUT_BITMAP_HELVETICA_18, 0.6, 0.0, 0.9, 800);
+    msg = new TextBox("S i r t e t", -0.1, 0.1, GLUT_BITMAP_HELVETICA_18, 0.6, 0.0, 0.9, 800);
+    button = new TextBox("S t a r t", -0.1, -0.12, GLUT_BITMAP_HELVETICA_18, 0.0, 0.4, 0.4, 800);
+    scoreBoard = new TextBox("text", 0, 0.5, GLUT_BITMAP_HELVETICA_18, 0.6, 0.0, 0.9, 800);
 }
 
 void Menu::handleHover(float x, float y)
@@ -62,11 +61,12 @@ void Menu::gameOver(int scoreNum)
 {
     score = scoreNum;
     gameIsOver = true;
+    button->newText("T r y  A g a i n !");
 }
 
 bool Menu::didClickButton1(float x, float y)
 {
-     if ((x <= 0.5 && x >= -0.5) && (y >= -0.2 && y <= 0.0))
+    if ((x <= 0.5 && x >= -0.5) && (y >= -0.2 && y <= 0.0))
     {
         return true;
     }
@@ -99,21 +99,25 @@ void Menu::draw()
     {
         glColor3f(1, 1, 1);
     }
+    if (gameIsOver)
+    {
+        scoreBoard->drawBitmapText(-0.1, 0.1, score);
+    }
+    else
+    {
+        msg->draw();
+    }
+
+    button->draw();
+
+    glColor3f(1, 1, 1);
+
     glBegin(GL_POLYGON);
     glVertex2f(-0.5, -0.2);
     glVertex2f(-0.5, 0.0);
     glVertex2f(0.5, 0.0);
     glVertex2f(0.5, -0.2);
     glEnd();
-    if (gameIsOver)
-    {
-        scoreBoard->drawBitmapText(-.2, 0.0, score);
-    }
-    else
-    {
-        msg->draw(0);
-    }
-
     // Draw button 2
     // Draw Menu BG
     glColor3f(0.8, 0.8, 0.8);

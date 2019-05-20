@@ -36,14 +36,6 @@ void TextBox::newText(char *nText)
 
 void TextBox::draw()
 {
-    //    int num = score;
-    //    stringstream ss;
-    //    ss << "SCORE : " << num;
-    //
-    //    const char *res = ss.str().c_str();
-
-void TextBox::draw(int score){
-    
     glColor3f(r, g, b);
     float offset = 0;
     for (int i = 0; i < text.length(); i++)

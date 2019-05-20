@@ -14,6 +14,7 @@ struct Menu
     int score;
     TextBox *scoreBoard;
     TextBox *msg;
+    TextBox *button;
 
     Menu();
     void handleHover(float x, float y);

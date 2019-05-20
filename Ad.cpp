@@ -8,7 +8,7 @@ Ad::Ad(const char* text, const char* url){
 
 
 void Ad::draw() const {
-    textbox->draw(0);
+    textbox->draw();
 }
 
 void Ad::handleKeyDown(unsigned char key, float x, float y) {
