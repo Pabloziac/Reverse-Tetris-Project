@@ -26,11 +26,20 @@ Game::Game()
     fireballFileName = "fireball.bmp";
 #endif
 
-    tmos = new Tetromino();
-    grid = new Grid();
+    tmos = NULL;
+    grid = NULL;
+    gameStarted = false;
+    menu = new Menu();
     // grid->deleteRow(4);
     char *text = "S C O R E : 0";
     scoreBoard = new TextBox(text, 0.6, 0.8, GLUT_BITMAP_HELVETICA_18, 0.6, 0.0, 0.9, 800);
+}
+
+void Game::startGame()
+{
+    tmos = new Tetromino();
+    grid = new Grid();
+    gameStarted = true;
     setRate(1);
     start();
 }
@@ -43,11 +52,11 @@ void Game::action()
     if (rows == -1)
     {
         stop();
-        menu->showFinalScore(); 
+        menu->gameOver(score);
+        gameStarted = false;
     }
     else if (rows >= 0)
     {
-
         score += rows * 10;
         if (resetAt > 500)
         {
@@ -69,12 +78,30 @@ void Game::action()
 
 void Game::draw() const
 {
-    tmos->draw();
-    grid->draw();
+    if (gameStarted)
+    {
+        grid->draw();
+        tmos->draw();
+        scoreBoard->drawBitmapText(1, 0.75, score);
+    }
+    else
+    {
+        menu->draw();
+    }
     //char* text = " SCORE : ";
-    scoreBoard->drawBitmapText(1, 0.75, score);
     //scoreBoard->draw(score);
 }
+void Game::handleLeftMouseDown(float a, float b)
+{
+    cout << "left mouse down" << endl;
+
+    if (menu->didClickButton1(a, b))
+    {
+        cout << "clicked button" << endl;
+        startGame();
+    }
+};
+
 void Game::handleSpecialKeyDown(int key, float a, float b)
 {
     if (key == GLUT_KEY_LEFT)
@@ -104,7 +131,7 @@ void Game::handleKeyDown(unsigned char key, float x, float y)
 {
     int k = key;
 
-    //cout << "Keyboard pressed: " << key << endl;
+    // cout << "Keyboard pressed: " << key << endl;
 
     if (key == ' ') //rotating by switching the enum version.
     {

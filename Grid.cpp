@@ -174,6 +174,7 @@ void Grid::deleteRows(std::vector<int> toDeleteVector)
     for (int i = toDeleteVector.size() - 1; i >= 0; i--)
     {
         int pos = toDeleteVector.at(i);
+
         nth += pos;
         gridData.erase(nth);
         nth -= pos;
@@ -205,9 +206,9 @@ void Grid::deleteRows(std::vector<int> toDeleteVector)
         {
             float x = -1.5 + rectWidth * j + 0.006 * j;
             float y = 1.0 - rectHeight * i - 0.006 * i;
+
             if (gridData.at(i).at(j) != NULL)
             {
-
                 gridData.at(i).at(j)->setX(x);
                 gridData.at(i).at(j)->setY(y);
             }

@@ -1,6 +1,8 @@
 #ifndef Menu_h
 #define Menu_h
 #include <string>
+#include "TextBox.h"
+
 using std::string;
 
 struct Menu
@@ -8,10 +10,13 @@ struct Menu
     bool button1Active;
     bool button2Active;
     bool resetButtonActive;
+    bool gameIsOver;
+    int score;
+    TextBox *scoreBoard;
+    TextBox *msg;
 
     Menu();
-
-    void handleHover(float x, float y, bool gameOver);
+    void handleHover(float x, float y);
 
     bool didClickButton1(float x, float y);
     bool didClickButton2(float x, float y);
@@ -20,6 +25,7 @@ struct Menu
     void draw();
     void showWinner(string company);
     void reset();
+    void gameOver(int scoreNum);
 };
 
 #endif /* Menu_h */

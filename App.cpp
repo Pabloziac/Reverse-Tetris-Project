@@ -46,6 +46,15 @@ void App::specialKeyDown(int key, float a, float b)
     }
 }
 
+void App::leftMouseDown(float a, float b)
+{
+
+    for (std::vector<AppComponent *>::iterator i = components.begin(); i != components.end(); ++i)
+    {
+        (*i)->handleLeftMouseDown(a, b);
+    }
+}
+
 App::~App()
 {
     for (std::vector<AppComponent *>::iterator i = components.begin(); i != components.end(); ++i)

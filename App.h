@@ -6,24 +6,28 @@
 #include "Game.h"
 #include "Ad.h"
 
-class App: public GlutApp {
-    
-    std::vector<AppComponent*> components;
-    
-    void addComponent(AppComponent* component){
+class App : public GlutApp
+{
+
+    std::vector<AppComponent *> components;
+
+    void addComponent(AppComponent *component)
+    {
         components.push_back(component);
     }
-    
+
     bool fullscreen;
+
 public:
-    
-    App(int argc, char** argv, int width, int height, const char* title);
-    
+    App(int argc, char **argv, int width, int height, const char *title);
+
     void draw() const;
-    
-    void specialKeyDown(int, float, float); 
+    void leftMouseDown(float, float);
+    // void hdn(float, float);
+
+    void specialKeyDown(int, float, float);
     void keyDown(unsigned char key, float x, float y);
-    
+
     ~App();
 };
 

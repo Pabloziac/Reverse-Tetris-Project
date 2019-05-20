@@ -35,6 +35,7 @@ public:
     Grid();
     void Print();
     void draw();
+    void start();
     std::vector<int> ContainsFullRows();
     void setAt(int i, int j, float x, float y, float w, float h, float r, float g, float b);
     Rect *getAt(int x, int y);
