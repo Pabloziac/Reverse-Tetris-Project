@@ -114,7 +114,7 @@ void Game::handleSpecialKeyDown(int key, float a, float b)
     else if (key == GLUT_KEY_DOWN)
     {
         //cout << "down" << endl;
-        tmos->shiftOffsetY(grid, -1);
+        // tmos->shiftOffsetY(grid, -1);
     }
     else if (key == GLUT_KEY_RIGHT)
     {
@@ -147,7 +147,7 @@ void Game::handleKeyDown(unsigned char key, float x, float y)
     else if (key == 's')
     {
         //cout << "down" << endl;
-        tmos->shiftOffsetY(grid, -1);
+        // tmos->shiftOffsetY(grid, -1);
     }
     else if (key == 'd')
     {
