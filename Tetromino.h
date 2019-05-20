@@ -62,14 +62,13 @@ public:
     void rotate();
     bool validPos();
     void setupFrame();
-    void nextAction(Grid *grid, int, int);
+    int nextAction(Grid *grid, int, int);
     bool canContinueGoingUp(Grid *grid);
     void nextVersion(Grid *);
     void shiftOffset(int, int);
     void shiftOffsetX(Grid *grid, int val);
     void shiftOffsetY(Grid *grid, int val);
     bool canShiftX(Grid *grid, int);
-    // bool canShiftY(Grid *grid, int);
     bool canShift(Grid *grid, int, int);
     int outsideRects();
     void generateModels();

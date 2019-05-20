@@ -596,8 +596,8 @@ bool Tetromino::canShift(Grid *grid, int iVal, int jVal)
                 int grY = tMosData.at(i).at(j)->getGridY();
 
                 //cout << "(" << i << ", " << j << ")"
-                    //  << "    "
-                    //  << "(" << grY << ", " << grX << ")" << endl;
+                //  << "    "
+                //  << "(" << grY << ", " << grX << ")" << endl;
 
                 int nextY = grY - iVal;
                 int nextX = grX + jVal;
@@ -645,9 +645,9 @@ void Tetromino::shiftOffset(int iVal, int jVal)
         int gridY = tMosData[gy][gx]->getGridY() - iVal;
 
         // //cout << "setting: "
-             //  << "(" << i << ", " << j << ")"
-             //  << "    "
-            //  << "(" << gridY << ", " << gridX << ")" << endl;
+        //  << "(" << i << ", " << j << ")"
+        //  << "    "
+        //  << "(" << gridY << ", " << gridX << ")" << endl;
 
         tMosData[gy][gx]->setGridX(gridX);
         tMosData[gy][gx]->setGridY(gridY);
@@ -787,7 +787,7 @@ bool Tetromino::canContinueGoingUp(Grid *grid)
     return true;
 }
 
-void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
+int Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
 {
     if (ticks == resetAt)
     {
@@ -805,10 +805,22 @@ void Tetromino::nextAction(Grid *grid, int ticks, int resetAt)
             //cout << "finished inserting for grid" << endl;
             // grid->Print1();
             // insert data into blocks
-            grid->check();
+            int rows = grid->check();
+            // if (rows >= 0)
+            // {
+            //     // }
+            //     // else(rows == -1){
+            // }
+            // else
+            // {
+
+            // }
+            //
             reset();
+            return rows;
         }
     }
+    return 0;
 }
 
 void Tetromino::insertIntoGrid(Grid *grid)
@@ -829,7 +841,7 @@ void Tetromino::insertIntoGrid(Grid *grid)
                 if (grid->getAt(currentY, currentX) == NULL)
                 {
                     //cout << "(" << currentX << "," << currentY << ")"
-                        //  << " is NULL" << endl;
+                    //  << " is NULL" << endl;
                     grid->setAt(currentY, currentX, curr->getX(), curr->getY(), curr->getW(), curr->getH(), curr->getR(), curr->getG(), curr->getB());
                 }
             }

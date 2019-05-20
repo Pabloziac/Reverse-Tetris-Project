@@ -38,7 +38,25 @@ Game::Game()
 void Game::action()
 {
     grid->continueMovingRects();
-    tmos->nextAction(grid, tickCounts, resetAt);
+    int rows = tmos->nextAction(grid, tickCounts, resetAt);
+
+    if (rows == -1)
+    {
+        stop();
+        menu->showFinalScore(); 
+    }
+    else if (rows >= 0)
+    {
+
+        score += rows * 10;
+        if (resetAt > 500)
+        {
+            if (score % 100 == 0)
+            {
+                resetAt -= 70;
+            }
+        }
+    }
     if (resetAt == tickCounts)
     {
         tickCounts = 0;

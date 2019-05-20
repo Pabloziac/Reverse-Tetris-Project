@@ -42,7 +42,7 @@ void Grid::resetGrid()
         gridData.push_back(aRow);
     }
 }
-void Grid::check()
+int Grid::check()
 {
     // check if any rows full
     // if so then delete all rows
@@ -86,9 +86,11 @@ void Grid::check()
         if (gridData.at(13).at(j) != NULL)
         {
             std::cout << "game over" << std::endl;
+            return -1;
             break;
         }
     }
+    return toDeleteList.size();
 }
 void Grid::Print()
 {

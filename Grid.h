@@ -40,7 +40,7 @@ public:
     Rect *getAt(int x, int y);
     void deleteRows(std::vector<int> toDeleteVector);
     void resetGrid();
-    void check();
+    int check();
     void continueMovingRects();
     ~Grid();
 };
