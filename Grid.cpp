@@ -42,6 +42,7 @@ void Grid::resetGrid()
         gridData.push_back(aRow);
     }
 }
+
 int Grid::check()
 {
     // check if any rows full
@@ -65,7 +66,6 @@ int Grid::check()
         }
         else if (filledSpots == 0)
         {
-
             break;
         }
     }
@@ -80,7 +80,7 @@ int Grid::check()
         // std::vector<int> toDeleteList;
         deleteRows(toDeleteList);
     }
-    Print();
+    // Print();
     for (int j = 0; j < gridData.at(13).size(); j++)
     {
         if (gridData.at(13).at(j) != NULL)

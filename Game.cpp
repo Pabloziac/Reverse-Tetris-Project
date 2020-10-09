@@ -92,13 +92,14 @@ void Game::draw() const
     //char* text = " SCORE : ";
     //scoreBoard->draw(score);
 }
+
 void Game::handleLeftMouseDown(float a, float b)
 {
-    cout << "left mouse down" << endl;
+    // cout << "left mouse down" << endl;
 
     if (menu->didClickButton1(a, b))
     {
-        cout << "clicked button" << endl;
+        // cout << "clicked button" << endl;
         startGame();
     }
 };
