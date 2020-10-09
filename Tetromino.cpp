@@ -62,6 +62,7 @@ void Tetromino::reset()
 
     setupFrame();
 }
+
 void Tetromino::generateModels()
 {
 
@@ -466,12 +467,17 @@ void Tetromino::generateModels()
 void Tetromino::setShapeAndRotation()
 {
     // generate random state;
-    srand(time(NULL));
+    #if defined(__linux__)
+        srand(time(NULL));
+    #endif
+
     int s = rand() % 7;
     int v = rand() % 4;
+    
     shape = (tMoShape)s;
     version = (tMoVersion)v;
 }
+
 void Tetromino::setupFrame()
 {
     for (int i = 0; i < models.at(shape).at(version).size(); i++)
